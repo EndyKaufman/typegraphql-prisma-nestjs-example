@@ -4,7 +4,7 @@ Example use NestJS + Prisma2 + Typegraphql
 
 ## Install
 ```
-git clone git@github.com:EndyKaufman/typegraphql-prisma-nestjs.git
+git clone https://github.com/EndyKaufman/typegraphql-prisma-nestjs-example.git
 cd typegraphql-prisma-nestjs
 npm i
 ```
