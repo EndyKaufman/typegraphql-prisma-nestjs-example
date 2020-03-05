@@ -1,4 +1,4 @@
-# nest-typescript-starter
+# typegraphql-prisma-nestjs-example
 
 Example use NestJS + Prisma2 + Typegraphql
 
