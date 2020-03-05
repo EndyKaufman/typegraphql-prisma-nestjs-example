@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./data.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator typegraphql {
+  provider = "node_modules/typegraphql-prisma-nestjs/generator.js"
+  output   = "../src/dal"
+}
+
+model User {
+  id          Int       @default(autoincrement())
+  email       String    @unique
+  username    String?
+  password    String
+  firstName   String?   @map("first_name")
+  lastName    String?   @map("last_name")
+  lastLogin   DateTime  @updatedAt @map("last_login")
+  isSuperuser Boolean   @default(false) @map("is_superuser")
+  isStaff     Boolean   @default(false) @map("is_staff")
+  isActive    Boolean   @default(false) @map("is_active")
+  dateJoined  DateTime  @default(now()) @map("date_joined")
+  dateOfBirth DateTime? @map("date_of_birth")
+  @@map("auth_users")
+}

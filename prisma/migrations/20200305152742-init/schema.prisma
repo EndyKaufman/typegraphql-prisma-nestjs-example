@@ -1,0 +1,27 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url = "***"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id          Int       @default(autoincrement()) @id
+  email       String    @unique
+  username    String?
+  password    String
+  firstName   String?   @map("first_name")
+  lastName    String?   @map("last_name")
+  lastLogin   DateTime  @updatedAt @map("last_login")
+  isSuperuser Boolean   @default(false) @map("is_superuser")
+  isStaff     Boolean   @default(false) @map("is_staff")
+  isActive    Boolean   @default(false) @map("is_active")
+  dateJoined  DateTime  @default(now()) @map("date_joined")
+  dateOfBirth DateTime? @map("date_of_birth")
+  @@map("auth_users")
+}
