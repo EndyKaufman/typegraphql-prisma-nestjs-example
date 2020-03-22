@@ -17,7 +17,9 @@ npm run start
 ## Open browser
 http://localhost:3000/graphql - graphql gui
 
-## links
+https://endykaufman-typegraphql-prisma-nestjs-example.glitch.me/graphql - online graphql gui
+
+## Links
 https://github.com/nestjs/nest/tree/master/sample/23-type-graphql
 
 https://github.com/prisma/prisma2/blob/master/docs/getting-started/quickstart-existing-project.md
