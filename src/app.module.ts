@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
 import { GraphQLModule } from "@nestjs/graphql";
 import { PrismaClient } from "@prisma/client";
-import { CrudResolversModule, RelationsResolversModule } from "./dal";
+import { CrudResolversModule } from "./dal";
 import { RecipesModule } from "./recipes/recipes.module";
 
 const prisma = new PrismaClient({
@@ -13,7 +13,6 @@ const prisma = new PrismaClient({
   imports: [
     RecipesModule,
     CrudResolversModule,
-    RelationsResolversModule,
     GraphQLModule.forRoot({
       installSubscriptionHandlers: true,
       autoSchemaFile: "schema.gql",
