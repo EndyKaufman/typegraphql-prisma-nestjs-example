@@ -60,17 +60,6 @@
       "value": "autoincrement()"
     },
     {
-      "tag": "CreateDirective",
-      "location": {
-        "path": {
-          "tag": "Field",
-          "model": "User",
-          "field": "id"
-        },
-        "directive": "id"
-      }
-    },
-    {
       "tag": "CreateField",
       "model": "User",
       "field": "email",

@@ -2,94 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type BatchPayload {
-  count: Int!
-}
-
-input BooleanFilter {
-  equals: Boolean
-  not: Boolean
-}
-
-"""Date custom scalar type"""
-scalar Date
-
-input DateTimeFilter {
-  equals: Date
-  not: Date
-  in: [Date!]
-  notIn: [Date!]
-  lt: Date
-  lte: Date
-  gt: Date
-  gte: Date
-}
-
-input IntFilter {
-  equals: Int
-  not: Int
-  in: [Int!]
-  notIn: [Int!]
-  lt: Int
-  lte: Int
-  gt: Int
-  gte: Int
-}
-
-type Mutation {
-  createOneUser(data: UserCreateInput!): User!
-  deleteOneUser(where: UserWhereUniqueInput!): User
-  updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  deleteManyUser(where: UserWhereInput): BatchPayload!
-  updateManyUser(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
-  upsertOneUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  addRecipe(newRecipeData: NewRecipeInput!): Recipe!
-  removeRecipe(id: String!): Boolean!
-}
-
-input NewRecipeInput {
-  title: String!
-  description: String
-  ingredients: [String!]!
-}
-
-input NullableDateTimeFilter {
-  equals: Date
-  not: Date
-  in: [Date!]
-  notIn: [Date!]
-  lt: Date
-  lte: Date
-  gt: Date
-  gte: Date
-}
-
-input NullableStringFilter {
-  equals: String
-  not: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-}
-
-enum OrderByArg {
-  asc
-  desc
-}
-
-type Query {
-  user(where: UserWhereUniqueInput!): User
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int): [User!]!
-  recipe(id: String!): Recipe!
-  recipes(skip: Int = 0, take: Int = 25): [Recipe!]!
-}
-
 type Recipe {
   id: ID!
   title: String!
@@ -98,22 +10,14 @@ type Recipe {
   ingredients: [String!]!
 }
 
-input StringFilter {
-  equals: String
-  not: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-}
+"""Date custom scalar type"""
+scalar Date
 
-type Subscription {
-  recipeAdded: Recipe!
+type Query {
+  user(where: UserWhereUniqueInput!): User
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int): [User!]!
+  recipe(id: String!): Recipe!
+  recipes(skip: Int = 0, take: Int = 25): [Recipe!]!
 }
 
 type User {
@@ -131,64 +35,8 @@ type User {
   dateOfBirth: Date
 }
 
-input UserCreateInput {
-  id: Int
-  email: String!
-  username: String
-  password: String!
-  firstName: String
-  lastName: String
-  lastLogin: Date
-  isSuperuser: Boolean
-  isStaff: Boolean
-  isActive: Boolean
-  dateJoined: Date
-  dateOfBirth: Date
-}
-
-input UserOrderByInput {
-  id: OrderByArg
-  email: OrderByArg
-  username: OrderByArg
-  password: OrderByArg
-  firstName: OrderByArg
-  lastName: OrderByArg
-  lastLogin: OrderByArg
-  isSuperuser: OrderByArg
-  isStaff: OrderByArg
-  isActive: OrderByArg
-  dateJoined: OrderByArg
-  dateOfBirth: OrderByArg
-}
-
-input UserUpdateInput {
-  id: Int
+input UserWhereUniqueInput {
   email: String
-  username: String
-  password: String
-  firstName: String
-  lastName: String
-  lastLogin: Date
-  isSuperuser: Boolean
-  isStaff: Boolean
-  isActive: Boolean
-  dateJoined: Date
-  dateOfBirth: Date
-}
-
-input UserUpdateManyMutationInput {
-  id: Int
-  email: String
-  username: String
-  password: String
-  firstName: String
-  lastName: String
-  lastLogin: Date
-  isSuperuser: Boolean
-  isStaff: Boolean
-  isActive: Boolean
-  dateJoined: Date
-  dateOfBirth: Date
 }
 
 input UserWhereInput {
@@ -209,6 +57,158 @@ input UserWhereInput {
   NOT: [UserWhereInput!]
 }
 
-input UserWhereUniqueInput {
+input IntFilter {
+  equals: Int
+  not: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+}
+
+input StringFilter {
+  equals: String
+  not: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+}
+
+input NullableStringFilter {
+  equals: String
+  not: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+}
+
+input DateTimeFilter {
+  equals: Date
+  not: Date
+  in: [Date!]
+  notIn: [Date!]
+  lt: Date
+  lte: Date
+  gt: Date
+  gte: Date
+}
+
+input BooleanFilter {
+  equals: Boolean
+  not: Boolean
+}
+
+input NullableDateTimeFilter {
+  equals: Date
+  not: Date
+  in: [Date!]
+  notIn: [Date!]
+  lt: Date
+  lte: Date
+  gt: Date
+  gte: Date
+}
+
+input UserOrderByInput {
+  id: OrderByArg
+  email: OrderByArg
+  username: OrderByArg
+  password: OrderByArg
+  firstName: OrderByArg
+  lastName: OrderByArg
+  lastLogin: OrderByArg
+  isSuperuser: OrderByArg
+  isStaff: OrderByArg
+  isActive: OrderByArg
+  dateJoined: OrderByArg
+  dateOfBirth: OrderByArg
+}
+
+enum OrderByArg {
+  asc
+  desc
+}
+
+type Mutation {
+  createOneUser(data: UserCreateInput!): User!
+  deleteOneUser(where: UserWhereUniqueInput!): User
+  updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  deleteManyUser(where: UserWhereInput): BatchPayload!
+  updateManyUser(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  upsertOneUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  addRecipe(newRecipeData: NewRecipeInput!): Recipe!
+  removeRecipe(id: String!): Boolean!
+}
+
+input UserCreateInput {
+  id: Int
+  email: String!
+  username: String
+  password: String!
+  firstName: String
+  lastName: String
+  lastLogin: Date
+  isSuperuser: Boolean
+  isStaff: Boolean
+  isActive: Boolean
+  dateJoined: Date
+  dateOfBirth: Date
+}
+
+input UserUpdateInput {
+  id: Int
   email: String
+  username: String
+  password: String
+  firstName: String
+  lastName: String
+  lastLogin: Date
+  isSuperuser: Boolean
+  isStaff: Boolean
+  isActive: Boolean
+  dateJoined: Date
+  dateOfBirth: Date
+}
+
+type BatchPayload {
+  count: Int!
+}
+
+input UserUpdateManyMutationInput {
+  id: Int
+  email: String
+  username: String
+  password: String
+  firstName: String
+  lastName: String
+  lastLogin: Date
+  isSuperuser: Boolean
+  isStaff: Boolean
+  isActive: Boolean
+  dateJoined: Date
+  dateOfBirth: Date
+}
+
+input NewRecipeInput {
+  title: String!
+  description: String
+  ingredients: [String!]!
+}
+
+type Subscription {
+  recipeAdded: Recipe!
 }

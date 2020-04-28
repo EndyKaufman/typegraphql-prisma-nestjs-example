@@ -10,8 +10,13 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator typegraphql {
+  provider = "node_modules/typegraphql-prisma-nestjs/generator.js"
+  output   = "../src/dal"
+}
+
 model User {
-  id          Int       @default(autoincrement()) @id
+  id          Int       @default(autoincrement())
   email       String    @unique
   username    String?
   password    String
