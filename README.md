@@ -24,7 +24,7 @@ https://endykaufman-typegraphql-prisma-nestjs-example.glitch.me/graphql - online
 
 ## Example of queries
 
-### Mutation by Prisma2 + TypeGraph generator = Generated Crud
+### Mutation by Prisma2 + TypeGraphQL generator = Generated Crud
 
 Query
 
@@ -54,7 +54,7 @@ Result
 }
 ```
 
-### Query by Prisma2 + TypeGraph generator = Generated Crud
+### Query by Prisma2 + TypeGraphQL generator = Generated Crud
 
 Query
 
