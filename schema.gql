@@ -16,6 +16,7 @@ scalar Date
 type Query {
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int): [User!]!
+  aggregateUser: AggregateUser!
   recipe(id: String!): Recipe!
   recipes(skip: Int = 0, take: Int = 25): [Recipe!]!
 }
@@ -141,6 +142,10 @@ input UserOrderByInput {
 enum OrderByArg {
   asc
   desc
+}
+
+type AggregateUser {
+  count: Int!
 }
 
 type Mutation {
