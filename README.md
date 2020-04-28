@@ -4,7 +4,7 @@ Example use NestJS + Prisma2 + Typegraphql
 
 ## Install
 
-```
+```bash
 git clone https://github.com/EndyKaufman/typegraphql-prisma-nestjs-example.git
 cd typegraphql-prisma-nestjs
 npm i
@@ -12,7 +12,7 @@ npm i
 
 ## Run
 
-```
+```bash
 npm run start:watch
 ```
 
@@ -28,7 +28,7 @@ https://endykaufman-typegraphql-prisma-nestjs-example.glitch.me/graphql - online
 
 Query
 
-```
+```graphql
 mutation {
   createOneUser(
     data: { username: "user", email: "user@user.com", password: "secret" }
@@ -42,7 +42,7 @@ mutation {
 
 Result
 
-```
+```js
 {
   "data": {
     "createOneUser": {
@@ -58,7 +58,7 @@ Result
 
 Query
 
-```
+```graphql
 query {
   users {
     id
@@ -70,7 +70,7 @@ query {
 
 Result
 
-```
+```js
 {
   "data": {
     "users": [
@@ -88,7 +88,7 @@ Result
 
 Query
 
-```
+```graphql
 query {
   recipes(skip:0) {
     title
@@ -99,7 +99,7 @@ query {
 
 Result
 
-```
+```js
 {
   "data": {
     "recipes": [
