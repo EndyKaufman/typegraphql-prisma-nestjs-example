@@ -30,7 +30,7 @@ Query
 
 ```graphql
 mutation {
-  createOneUser(
+  createUser(
     data: { username: "user", email: "user@user.com", password: "secret" }
   ) {
     email
@@ -45,7 +45,7 @@ Result
 ```js
 {
   "data": {
-    "createOneUser": {
+    "createUser": {
       "email": "user@user.com",
       "username": "user",
       "password": "secret"
