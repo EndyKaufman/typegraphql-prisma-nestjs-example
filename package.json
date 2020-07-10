@@ -28,7 +28,7 @@
   "dependencies": {
     "@nestjs/common": "7.0.11",
     "@nestjs/core": "7.0.11",
-    "@nestjs/graphql": "7.3.7",
+    "@nestjs/graphql": "7.5.2",
     "@nestjs/platform-express": "7.0.11",
     "apollo-server-express": "2.13.1",
     "class-transformer": "0.2.3",
@@ -40,7 +40,7 @@
     "type-graphql": "0.17.6",
     "@prisma/client": "^2.0.0-beta.5",
     "@prisma/generator-helper": "^2.0.0-alpha.1154",
-    "@prisma/sdk": "^2.0.0-beta.5"
+    "@prisma/sdk": "^2.0.0"
   },
   "devDependencies": {
     "@nestjs/cli": "7.1.5",
