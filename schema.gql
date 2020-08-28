@@ -15,8 +15,8 @@ scalar Date
 
 type Query {
   user(where: UserWhereUniqueInput!): User
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int): [User!]!
-  aggregateUser: AggregateUser!
+  users(where: UserWhereInput, orderBy: [UserOrderByInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserDistinctFieldEnum!]): [User!]!
+  aggregateUser(where: UserWhereInput, orderBy: [UserOrderByInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserDistinctFieldEnum!]): AggregateUser!
   recipe(id: String!): Recipe!
   recipes(skip: Int = 0, take: Int = 25): [Recipe!]!
 }
@@ -37,41 +37,52 @@ type User {
 }
 
 input UserWhereUniqueInput {
+  id: Int
   email: String
 }
 
 input UserWhereInput {
-  id: IntFilter
-  email: StringFilter
-  username: NullableStringFilter
-  password: StringFilter
-  firstName: NullableStringFilter
-  lastName: NullableStringFilter
-  lastLogin: DateTimeFilter
-  isSuperuser: BooleanFilter
-  isStaff: BooleanFilter
-  isActive: BooleanFilter
-  dateJoined: DateTimeFilter
-  dateOfBirth: NullableDateTimeFilter
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]
+  id: IntFilter
+  email: StringFilter
+  username: StringNullableFilter
+  password: StringFilter
+  firstName: StringNullableFilter
+  lastName: StringNullableFilter
+  lastLogin: DateTimeFilter
+  isSuperuser: BoolFilter
+  isStaff: BoolFilter
+  isActive: BoolFilter
+  dateJoined: DateTimeFilter
+  dateOfBirth: DateTimeNullableFilter
 }
 
 input IntFilter {
   equals: Int
-  not: Int
   in: [Int!]
   notIn: [Int!]
   lt: Int
   lte: Int
   gt: Int
   gte: Int
+  not: NestedIntFilter
+}
+
+input NestedIntFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntFilter
 }
 
 input StringFilter {
   equals: String
-  not: String
   in: [String!]
   notIn: [String!]
   lt: String
@@ -81,11 +92,11 @@ input StringFilter {
   contains: String
   startsWith: String
   endsWith: String
+  not: NestedStringFilter
 }
 
-input NullableStringFilter {
+input NestedStringFilter {
   equals: String
-  not: String
   in: [String!]
   notIn: [String!]
   lt: String
@@ -95,57 +106,148 @@ input NullableStringFilter {
   contains: String
   startsWith: String
   endsWith: String
+  not: NestedStringFilter
+}
+
+input StringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableFilter
+}
+
+input NestedStringNullableFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableFilter
 }
 
 input DateTimeFilter {
   equals: Date
-  not: Date
   in: [Date!]
   notIn: [Date!]
   lt: Date
   lte: Date
   gt: Date
   gte: Date
+  not: NestedDateTimeFilter
 }
 
-input BooleanFilter {
-  equals: Boolean
-  not: Boolean
-}
-
-input NullableDateTimeFilter {
+input NestedDateTimeFilter {
   equals: Date
-  not: Date
   in: [Date!]
   notIn: [Date!]
   lt: Date
   lte: Date
   gt: Date
   gte: Date
+  not: NestedDateTimeFilter
+}
+
+input BoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input NestedBoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+input DateTimeNullableFilter {
+  equals: Date
+  in: [Date!]
+  notIn: [Date!]
+  lt: Date
+  lte: Date
+  gt: Date
+  gte: Date
+  not: NestedDateTimeNullableFilter
+}
+
+input NestedDateTimeNullableFilter {
+  equals: Date
+  in: [Date!]
+  notIn: [Date!]
+  lt: Date
+  lte: Date
+  gt: Date
+  gte: Date
+  not: NestedDateTimeNullableFilter
 }
 
 input UserOrderByInput {
-  id: OrderByArg
-  email: OrderByArg
-  username: OrderByArg
-  password: OrderByArg
-  firstName: OrderByArg
-  lastName: OrderByArg
-  lastLogin: OrderByArg
-  isSuperuser: OrderByArg
-  isStaff: OrderByArg
-  isActive: OrderByArg
-  dateJoined: OrderByArg
-  dateOfBirth: OrderByArg
+  id: SortOrder
+  email: SortOrder
+  username: SortOrder
+  password: SortOrder
+  firstName: SortOrder
+  lastName: SortOrder
+  lastLogin: SortOrder
+  isSuperuser: SortOrder
+  isStaff: SortOrder
+  isActive: SortOrder
+  dateJoined: SortOrder
+  dateOfBirth: SortOrder
 }
 
-enum OrderByArg {
+enum SortOrder {
   asc
   desc
 }
 
+enum UserDistinctFieldEnum {
+  id
+  email
+  username
+  password
+  firstName
+  lastName
+  lastLogin
+  isSuperuser
+  isStaff
+  isActive
+  dateJoined
+  dateOfBirth
+}
+
 type AggregateUser {
   count: Int!
+  avg: UserAvgAggregateOutputType
+  sum: UserSumAggregateOutputType
+  min: UserMinAggregateOutputType
+  max: UserMaxAggregateOutputType
+}
+
+type UserAvgAggregateOutputType {
+  id: Float!
+}
+
+type UserSumAggregateOutputType {
+  id: Int!
+}
+
+type UserMinAggregateOutputType {
+  id: Int!
+}
+
+type UserMaxAggregateOutputType {
+  id: Int!
 }
 
 type Mutation {
@@ -160,7 +262,6 @@ type Mutation {
 }
 
 input UserCreateInput {
-  id: Int
   email: String!
   username: String
   password: String!
@@ -175,7 +276,6 @@ input UserCreateInput {
 }
 
 input UserUpdateInput {
-  id: Int
   email: String
   username: String
   password: String
@@ -194,7 +294,6 @@ type BatchPayload {
 }
 
 input UserUpdateManyMutationInput {
-  id: Int
   email: String
   username: String
   password: String
