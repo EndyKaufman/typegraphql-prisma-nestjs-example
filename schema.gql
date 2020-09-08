@@ -276,17 +276,37 @@ input UserCreateInput {
 }
 
 input UserUpdateInput {
-  email: String
-  username: String
-  password: String
-  firstName: String
-  lastName: String
-  lastLogin: Date
-  isSuperuser: Boolean
-  isStaff: Boolean
-  isActive: Boolean
-  dateJoined: Date
-  dateOfBirth: Date
+  email: StringFieldUpdateOperationsInput
+  username: NullableStringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  firstName: NullableStringFieldUpdateOperationsInput
+  lastName: NullableStringFieldUpdateOperationsInput
+  lastLogin: DateTimeFieldUpdateOperationsInput
+  isSuperuser: BoolFieldUpdateOperationsInput
+  isStaff: BoolFieldUpdateOperationsInput
+  isActive: BoolFieldUpdateOperationsInput
+  dateJoined: DateTimeFieldUpdateOperationsInput
+  dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
+}
+
+input StringFieldUpdateOperationsInput {
+  set: String
+}
+
+input NullableStringFieldUpdateOperationsInput {
+  set: String
+}
+
+input DateTimeFieldUpdateOperationsInput {
+  set: Date
+}
+
+input BoolFieldUpdateOperationsInput {
+  set: Boolean
+}
+
+input NullableDateTimeFieldUpdateOperationsInput {
+  set: Date
 }
 
 type BatchPayload {
@@ -294,17 +314,17 @@ type BatchPayload {
 }
 
 input UserUpdateManyMutationInput {
-  email: String
-  username: String
-  password: String
-  firstName: String
-  lastName: String
-  lastLogin: Date
-  isSuperuser: Boolean
-  isStaff: Boolean
-  isActive: Boolean
-  dateJoined: Date
-  dateOfBirth: Date
+  email: StringFieldUpdateOperationsInput
+  username: NullableStringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  firstName: NullableStringFieldUpdateOperationsInput
+  lastName: NullableStringFieldUpdateOperationsInput
+  lastLogin: DateTimeFieldUpdateOperationsInput
+  isSuperuser: BoolFieldUpdateOperationsInput
+  isStaff: BoolFieldUpdateOperationsInput
+  isActive: BoolFieldUpdateOperationsInput
+  dateJoined: DateTimeFieldUpdateOperationsInput
+  dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
 }
 
 input NewRecipeInput {
