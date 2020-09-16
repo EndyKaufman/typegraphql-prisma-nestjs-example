@@ -40,7 +40,7 @@
     "type-graphql": "^1.0.0",
     "@prisma/client": "^2.6.2",
     "@prisma/generator-helper": "^2.0.0-alpha.1154",
-    "@prisma/sdk": "^2.6.2",
+    "@prisma/sdk": "^2.7.0",
     "graphql-fields": "^2.0.3",
     "graphql-type-json": "^0.3.2"
   },
