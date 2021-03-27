@@ -15,8 +15,9 @@ scalar Date
 
 type Query {
   user(where: UserWhereUniqueInput!): User
-  users(where: UserWhereInput, orderBy: [UserOrderByInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserDistinctFieldEnum!]): [User!]!
-  aggregateUser(where: UserWhereInput, orderBy: [UserOrderByInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserDistinctFieldEnum!]): AggregateUser!
+  findFirstUser(where: UserWhereInput, orderBy: [UserOrderByInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): User
+  users(where: UserWhereInput, orderBy: [UserOrderByInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): [User!]!
+  aggregateUser(where: UserWhereInput, orderBy: [UserOrderByInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int): AggregateUser!
   recipe(id: String!): Recipe!
   recipes(skip: Int = 0, take: Int = 25): [Recipe!]!
 }
@@ -211,7 +212,7 @@ enum SortOrder {
   desc
 }
 
-enum UserDistinctFieldEnum {
+enum UserScalarFieldEnum {
   id
   email
   username
@@ -227,35 +228,73 @@ enum UserDistinctFieldEnum {
 }
 
 type AggregateUser {
-  count: Int!
-  avg: UserAvgAggregateOutputType
-  sum: UserSumAggregateOutputType
-  min: UserMinAggregateOutputType
-  max: UserMaxAggregateOutputType
+  count: UserCountAggregate
+  avg: UserAvgAggregate
+  sum: UserSumAggregate
+  min: UserMinAggregate
+  max: UserMaxAggregate
 }
 
-type UserAvgAggregateOutputType {
+type UserCountAggregate {
+  id: Int!
+  email: Int
+  username: Int
+  password: Int
+  firstName: Int
+  lastName: Int
+  lastLogin: Int
+  isSuperuser: Int
+  isStaff: Int
+  isActive: Int
+  dateJoined: Int
+  dateOfBirth: Int
+  _all: Int!
+}
+
+type UserAvgAggregate {
   id: Float!
 }
 
-type UserSumAggregateOutputType {
+type UserSumAggregate {
   id: Int!
 }
 
-type UserMinAggregateOutputType {
+type UserMinAggregate {
   id: Int!
+  email: String
+  username: String
+  password: String
+  firstName: String
+  lastName: String
+  lastLogin: Date
+  isSuperuser: Boolean
+  isStaff: Boolean
+  isActive: Boolean
+  dateJoined: Date
+  dateOfBirth: Date
 }
 
-type UserMaxAggregateOutputType {
+type UserMaxAggregate {
   id: Int!
+  email: String
+  username: String
+  password: String
+  firstName: String
+  lastName: String
+  lastLogin: Date
+  isSuperuser: Boolean
+  isStaff: Boolean
+  isActive: Boolean
+  dateJoined: Date
+  dateOfBirth: Date
 }
 
 type Mutation {
   createUser(data: UserCreateInput!): User!
   deleteUser(where: UserWhereUniqueInput!): User
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  deleteManyUser(where: UserWhereInput): BatchPayload!
-  updateManyUser(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  deleteManyUser(where: UserWhereInput): AffectedRowsOutput!
+  updateManyUser(data: UserUpdateManyMutationInput!, where: UserWhereInput): AffectedRowsOutput!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   addRecipe(newRecipeData: NewRecipeInput!): Recipe!
   removeRecipe(id: String!): Boolean!
@@ -309,7 +348,7 @@ input NullableDateTimeFieldUpdateOperationsInput {
   set: Date
 }
 
-type BatchPayload {
+type AffectedRowsOutput {
   count: Int!
 }
 

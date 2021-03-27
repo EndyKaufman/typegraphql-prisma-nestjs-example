@@ -4,6 +4,6 @@ import { RecipesResolver } from './recipes.resolver';
 import { RecipesService } from './recipes.service';
 
 @Module({
-  providers: [RecipesResolver, RecipesService, DateScalar],
+    providers: [RecipesResolver, RecipesService, DateScalar],
 })
 export class RecipesModule {}
