@@ -6,8 +6,8 @@ Example use NestJS + Prisma2 + Typegraphql
 
 ```bash
 git clone https://github.com/EndyKaufman/typegraphql-prisma-nestjs-example.git
-cd typegraphql-prisma-nestjs
-npm i
+cd typegraphql-prisma-nestjs-example
+npm ci
 ```
 
 ## Run
