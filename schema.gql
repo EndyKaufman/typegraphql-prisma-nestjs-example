@@ -18,6 +18,7 @@ type Query {
   findFirstUser(where: UserWhereInput, orderBy: [UserOrderByInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): User
   users(where: UserWhereInput, orderBy: [UserOrderByInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): [User!]!
   aggregateUser(where: UserWhereInput, orderBy: [UserOrderByInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int): AggregateUser!
+  groupByUser(where: UserWhereInput, orderBy: [UserOrderByInput!], by: [UserScalarFieldEnum!]!, having: UserScalarWhereWithAggregatesInput, take: Int, skip: Int): [UserGroupBy!]!
   recipe(id: String!): Recipe!
   recipes(skip: Int = 0, take: Int = 25): [Recipe!]!
 }
@@ -237,30 +238,30 @@ type AggregateUser {
 
 type UserCountAggregate {
   id: Int!
-  email: Int
-  username: Int
-  password: Int
-  firstName: Int
-  lastName: Int
-  lastLogin: Int
-  isSuperuser: Int
-  isStaff: Int
-  isActive: Int
-  dateJoined: Int
-  dateOfBirth: Int
+  email: Int!
+  username: Int!
+  password: Int!
+  firstName: Int!
+  lastName: Int!
+  lastLogin: Int!
+  isSuperuser: Int!
+  isStaff: Int!
+  isActive: Int!
+  dateJoined: Int!
+  dateOfBirth: Int!
   _all: Int!
 }
 
 type UserAvgAggregate {
-  id: Float!
+  id: Float
 }
 
 type UserSumAggregate {
-  id: Int!
+  id: Int
 }
 
 type UserMinAggregate {
-  id: Int!
+  id: Int
   email: String
   username: String
   password: String
@@ -275,7 +276,7 @@ type UserMinAggregate {
 }
 
 type UserMaxAggregate {
-  id: Int!
+  id: Int
   email: String
   username: String
   password: String
@@ -287,6 +288,238 @@ type UserMaxAggregate {
   isActive: Boolean
   dateJoined: Date
   dateOfBirth: Date
+}
+
+type UserGroupBy {
+  id: Int!
+  email: String!
+  username: String
+  password: String!
+  firstName: String
+  lastName: String
+  lastLogin: Date!
+  isSuperuser: Boolean!
+  isStaff: Boolean!
+  isActive: Boolean!
+  dateJoined: Date!
+  dateOfBirth: Date
+  count: UserCountAggregate
+  avg: UserAvgAggregate
+  sum: UserSumAggregate
+  min: UserMinAggregate
+  max: UserMaxAggregate
+}
+
+input UserScalarWhereWithAggregatesInput {
+  AND: [UserScalarWhereWithAggregatesInput!]
+  OR: [UserScalarWhereWithAggregatesInput!]
+  NOT: [UserScalarWhereWithAggregatesInput!]
+  id: IntWithAggregatesFilter
+  email: StringWithAggregatesFilter
+  username: StringNullableWithAggregatesFilter
+  password: StringWithAggregatesFilter
+  firstName: StringNullableWithAggregatesFilter
+  lastName: StringNullableWithAggregatesFilter
+  lastLogin: DateTimeWithAggregatesFilter
+  isSuperuser: BoolWithAggregatesFilter
+  isStaff: BoolWithAggregatesFilter
+  isActive: BoolWithAggregatesFilter
+  dateJoined: DateTimeWithAggregatesFilter
+  dateOfBirth: DateTimeNullableWithAggregatesFilter
+}
+
+input IntWithAggregatesFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntWithAggregatesFilter
+  count: NestedIntFilter
+  avg: NestedFloatFilter
+  sum: NestedIntFilter
+  min: NestedIntFilter
+  max: NestedIntFilter
+}
+
+input NestedIntWithAggregatesFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntWithAggregatesFilter
+  count: NestedIntFilter
+  avg: NestedFloatFilter
+  sum: NestedIntFilter
+  min: NestedIntFilter
+  max: NestedIntFilter
+}
+
+input NestedFloatFilter {
+  equals: Float
+  in: [Float!]
+  notIn: [Float!]
+  lt: Float
+  lte: Float
+  gt: Float
+  gte: Float
+  not: NestedFloatFilter
+}
+
+input StringWithAggregatesFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringWithAggregatesFilter
+  count: NestedIntFilter
+  min: NestedStringFilter
+  max: NestedStringFilter
+}
+
+input NestedStringWithAggregatesFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringWithAggregatesFilter
+  count: NestedIntFilter
+  min: NestedStringFilter
+  max: NestedStringFilter
+}
+
+input StringNullableWithAggregatesFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableWithAggregatesFilter
+  count: NestedIntNullableFilter
+  min: NestedStringNullableFilter
+  max: NestedStringNullableFilter
+}
+
+input NestedStringNullableWithAggregatesFilter {
+  equals: String
+  in: [String!]
+  notIn: [String!]
+  lt: String
+  lte: String
+  gt: String
+  gte: String
+  contains: String
+  startsWith: String
+  endsWith: String
+  not: NestedStringNullableWithAggregatesFilter
+  count: NestedIntNullableFilter
+  min: NestedStringNullableFilter
+  max: NestedStringNullableFilter
+}
+
+input NestedIntNullableFilter {
+  equals: Int
+  in: [Int!]
+  notIn: [Int!]
+  lt: Int
+  lte: Int
+  gt: Int
+  gte: Int
+  not: NestedIntNullableFilter
+}
+
+input DateTimeWithAggregatesFilter {
+  equals: Date
+  in: [Date!]
+  notIn: [Date!]
+  lt: Date
+  lte: Date
+  gt: Date
+  gte: Date
+  not: NestedDateTimeWithAggregatesFilter
+  count: NestedIntFilter
+  min: NestedDateTimeFilter
+  max: NestedDateTimeFilter
+}
+
+input NestedDateTimeWithAggregatesFilter {
+  equals: Date
+  in: [Date!]
+  notIn: [Date!]
+  lt: Date
+  lte: Date
+  gt: Date
+  gte: Date
+  not: NestedDateTimeWithAggregatesFilter
+  count: NestedIntFilter
+  min: NestedDateTimeFilter
+  max: NestedDateTimeFilter
+}
+
+input BoolWithAggregatesFilter {
+  equals: Boolean
+  not: NestedBoolWithAggregatesFilter
+  count: NestedIntFilter
+  min: NestedBoolFilter
+  max: NestedBoolFilter
+}
+
+input NestedBoolWithAggregatesFilter {
+  equals: Boolean
+  not: NestedBoolWithAggregatesFilter
+  count: NestedIntFilter
+  min: NestedBoolFilter
+  max: NestedBoolFilter
+}
+
+input DateTimeNullableWithAggregatesFilter {
+  equals: Date
+  in: [Date!]
+  notIn: [Date!]
+  lt: Date
+  lte: Date
+  gt: Date
+  gte: Date
+  not: NestedDateTimeNullableWithAggregatesFilter
+  count: NestedIntNullableFilter
+  min: NestedDateTimeNullableFilter
+  max: NestedDateTimeNullableFilter
+}
+
+input NestedDateTimeNullableWithAggregatesFilter {
+  equals: Date
+  in: [Date!]
+  notIn: [Date!]
+  lt: Date
+  lte: Date
+  gt: Date
+  gte: Date
+  not: NestedDateTimeNullableWithAggregatesFilter
+  count: NestedIntNullableFilter
+  min: NestedDateTimeNullableFilter
+  max: NestedDateTimeNullableFilter
 }
 
 type Mutation {
