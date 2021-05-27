@@ -229,11 +229,11 @@ enum UserScalarFieldEnum {
 }
 
 type AggregateUser {
-  count: UserCountAggregate
-  avg: UserAvgAggregate
-  sum: UserSumAggregate
-  min: UserMinAggregate
-  max: UserMaxAggregate
+  _count: UserCountAggregate
+  _avg: UserAvgAggregate
+  _sum: UserSumAggregate
+  _min: UserMinAggregate
+  _max: UserMaxAggregate
 }
 
 type UserCountAggregate {
@@ -303,11 +303,11 @@ type UserGroupBy {
   isActive: Boolean!
   dateJoined: Date!
   dateOfBirth: Date
-  count: UserCountAggregate
-  avg: UserAvgAggregate
-  sum: UserSumAggregate
-  min: UserMinAggregate
-  max: UserMaxAggregate
+  _count: UserCountAggregate
+  _avg: UserAvgAggregate
+  _sum: UserSumAggregate
+  _min: UserMinAggregate
+  _max: UserMaxAggregate
 }
 
 input UserScalarWhereWithAggregatesInput {
@@ -337,11 +337,11 @@ input IntWithAggregatesFilter {
   gt: Int
   gte: Int
   not: NestedIntWithAggregatesFilter
-  count: NestedIntFilter
-  avg: NestedFloatFilter
-  sum: NestedIntFilter
-  min: NestedIntFilter
-  max: NestedIntFilter
+  _count: NestedIntFilter
+  _avg: NestedFloatFilter
+  _sum: NestedIntFilter
+  _min: NestedIntFilter
+  _max: NestedIntFilter
 }
 
 input NestedIntWithAggregatesFilter {
@@ -353,11 +353,11 @@ input NestedIntWithAggregatesFilter {
   gt: Int
   gte: Int
   not: NestedIntWithAggregatesFilter
-  count: NestedIntFilter
-  avg: NestedFloatFilter
-  sum: NestedIntFilter
-  min: NestedIntFilter
-  max: NestedIntFilter
+  _count: NestedIntFilter
+  _avg: NestedFloatFilter
+  _sum: NestedIntFilter
+  _min: NestedIntFilter
+  _max: NestedIntFilter
 }
 
 input NestedFloatFilter {
@@ -383,9 +383,9 @@ input StringWithAggregatesFilter {
   startsWith: String
   endsWith: String
   not: NestedStringWithAggregatesFilter
-  count: NestedIntFilter
-  min: NestedStringFilter
-  max: NestedStringFilter
+  _count: NestedIntFilter
+  _min: NestedStringFilter
+  _max: NestedStringFilter
 }
 
 input NestedStringWithAggregatesFilter {
@@ -400,9 +400,9 @@ input NestedStringWithAggregatesFilter {
   startsWith: String
   endsWith: String
   not: NestedStringWithAggregatesFilter
-  count: NestedIntFilter
-  min: NestedStringFilter
-  max: NestedStringFilter
+  _count: NestedIntFilter
+  _min: NestedStringFilter
+  _max: NestedStringFilter
 }
 
 input StringNullableWithAggregatesFilter {
@@ -417,9 +417,9 @@ input StringNullableWithAggregatesFilter {
   startsWith: String
   endsWith: String
   not: NestedStringNullableWithAggregatesFilter
-  count: NestedIntNullableFilter
-  min: NestedStringNullableFilter
-  max: NestedStringNullableFilter
+  _count: NestedIntNullableFilter
+  _min: NestedStringNullableFilter
+  _max: NestedStringNullableFilter
 }
 
 input NestedStringNullableWithAggregatesFilter {
@@ -434,9 +434,9 @@ input NestedStringNullableWithAggregatesFilter {
   startsWith: String
   endsWith: String
   not: NestedStringNullableWithAggregatesFilter
-  count: NestedIntNullableFilter
-  min: NestedStringNullableFilter
-  max: NestedStringNullableFilter
+  _count: NestedIntNullableFilter
+  _min: NestedStringNullableFilter
+  _max: NestedStringNullableFilter
 }
 
 input NestedIntNullableFilter {
@@ -459,9 +459,9 @@ input DateTimeWithAggregatesFilter {
   gt: Date
   gte: Date
   not: NestedDateTimeWithAggregatesFilter
-  count: NestedIntFilter
-  min: NestedDateTimeFilter
-  max: NestedDateTimeFilter
+  _count: NestedIntFilter
+  _min: NestedDateTimeFilter
+  _max: NestedDateTimeFilter
 }
 
 input NestedDateTimeWithAggregatesFilter {
@@ -473,25 +473,25 @@ input NestedDateTimeWithAggregatesFilter {
   gt: Date
   gte: Date
   not: NestedDateTimeWithAggregatesFilter
-  count: NestedIntFilter
-  min: NestedDateTimeFilter
-  max: NestedDateTimeFilter
+  _count: NestedIntFilter
+  _min: NestedDateTimeFilter
+  _max: NestedDateTimeFilter
 }
 
 input BoolWithAggregatesFilter {
   equals: Boolean
   not: NestedBoolWithAggregatesFilter
-  count: NestedIntFilter
-  min: NestedBoolFilter
-  max: NestedBoolFilter
+  _count: NestedIntFilter
+  _min: NestedBoolFilter
+  _max: NestedBoolFilter
 }
 
 input NestedBoolWithAggregatesFilter {
   equals: Boolean
   not: NestedBoolWithAggregatesFilter
-  count: NestedIntFilter
-  min: NestedBoolFilter
-  max: NestedBoolFilter
+  _count: NestedIntFilter
+  _min: NestedBoolFilter
+  _max: NestedBoolFilter
 }
 
 input DateTimeNullableWithAggregatesFilter {
@@ -503,9 +503,9 @@ input DateTimeNullableWithAggregatesFilter {
   gt: Date
   gte: Date
   not: NestedDateTimeNullableWithAggregatesFilter
-  count: NestedIntNullableFilter
-  min: NestedDateTimeNullableFilter
-  max: NestedDateTimeNullableFilter
+  _count: NestedIntNullableFilter
+  _min: NestedDateTimeNullableFilter
+  _max: NestedDateTimeNullableFilter
 }
 
 input NestedDateTimeNullableWithAggregatesFilter {
@@ -517,9 +517,9 @@ input NestedDateTimeNullableWithAggregatesFilter {
   gt: Date
   gte: Date
   not: NestedDateTimeNullableWithAggregatesFilter
-  count: NestedIntNullableFilter
-  min: NestedDateTimeNullableFilter
-  max: NestedDateTimeNullableFilter
+  _count: NestedIntNullableFilter
+  _min: NestedDateTimeNullableFilter
+  _max: NestedDateTimeNullableFilter
 }
 
 type Mutation {
