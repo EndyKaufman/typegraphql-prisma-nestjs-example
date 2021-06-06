@@ -121,6 +121,8 @@ https://github.com/nestjs/nest/tree/master/sample/23-type-graphql
 
 https://github.com/prisma/prisma2/blob/master/docs/getting-started/quickstart-existing-project.md
 
+https://github.com/MichalLytek/typegraphql-prisma
+
 https://github.com/MichalLytek/type-graphql
 
 https://github.com/EndyKaufman/typegraphql-prisma-nestjs
