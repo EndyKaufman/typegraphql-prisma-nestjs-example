@@ -15,10 +15,10 @@ scalar Date
 
 type Query {
   user(where: UserWhereUniqueInput!): User
-  findFirstUser(where: UserWhereInput, orderBy: [UserOrderByInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): User
-  users(where: UserWhereInput, orderBy: [UserOrderByInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): [User!]!
-  aggregateUser(where: UserWhereInput, orderBy: [UserOrderByInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int): AggregateUser!
-  groupByUser(where: UserWhereInput, orderBy: [UserOrderByInput!], by: [UserScalarFieldEnum!]!, having: UserScalarWhereWithAggregatesInput, take: Int, skip: Int): [UserGroupBy!]!
+  findFirstUser(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): User
+  users(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): [User!]!
+  aggregateUser(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int): AggregateUser!
+  groupByUser(where: UserWhereInput, orderBy: [UserOrderByWithAggregationInput!], by: [UserScalarFieldEnum!]!, having: UserScalarWhereWithAggregatesInput, take: Int, skip: Int): [UserGroupBy!]!
   recipe(id: String!): Recipe!
   recipes(skip: Int = 0, take: Int = 25): [Recipe!]!
 }
@@ -193,7 +193,7 @@ input NestedDateTimeNullableFilter {
   not: NestedDateTimeNullableFilter
 }
 
-input UserOrderByInput {
+input UserOrderByWithRelationInput {
   id: SortOrder
   email: SortOrder
   username: SortOrder
@@ -308,6 +308,79 @@ type UserGroupBy {
   _sum: UserSumAggregate
   _min: UserMinAggregate
   _max: UserMaxAggregate
+}
+
+input UserOrderByWithAggregationInput {
+  id: SortOrder
+  email: SortOrder
+  username: SortOrder
+  password: SortOrder
+  firstName: SortOrder
+  lastName: SortOrder
+  lastLogin: SortOrder
+  isSuperuser: SortOrder
+  isStaff: SortOrder
+  isActive: SortOrder
+  dateJoined: SortOrder
+  dateOfBirth: SortOrder
+  _count: UserCountOrderByAggregateInput
+  _avg: UserAvgOrderByAggregateInput
+  _max: UserMaxOrderByAggregateInput
+  _min: UserMinOrderByAggregateInput
+  _sum: UserSumOrderByAggregateInput
+}
+
+input UserCountOrderByAggregateInput {
+  id: SortOrder
+  email: SortOrder
+  username: SortOrder
+  password: SortOrder
+  firstName: SortOrder
+  lastName: SortOrder
+  lastLogin: SortOrder
+  isSuperuser: SortOrder
+  isStaff: SortOrder
+  isActive: SortOrder
+  dateJoined: SortOrder
+  dateOfBirth: SortOrder
+}
+
+input UserAvgOrderByAggregateInput {
+  id: SortOrder
+}
+
+input UserMaxOrderByAggregateInput {
+  id: SortOrder
+  email: SortOrder
+  username: SortOrder
+  password: SortOrder
+  firstName: SortOrder
+  lastName: SortOrder
+  lastLogin: SortOrder
+  isSuperuser: SortOrder
+  isStaff: SortOrder
+  isActive: SortOrder
+  dateJoined: SortOrder
+  dateOfBirth: SortOrder
+}
+
+input UserMinOrderByAggregateInput {
+  id: SortOrder
+  email: SortOrder
+  username: SortOrder
+  password: SortOrder
+  firstName: SortOrder
+  lastName: SortOrder
+  lastLogin: SortOrder
+  isSuperuser: SortOrder
+  isStaff: SortOrder
+  isActive: SortOrder
+  dateJoined: SortOrder
+  dateOfBirth: SortOrder
+}
+
+input UserSumOrderByAggregateInput {
+  id: SortOrder
 }
 
 input UserScalarWhereWithAggregatesInput {
