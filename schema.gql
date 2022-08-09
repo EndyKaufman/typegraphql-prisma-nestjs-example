@@ -14,33 +14,75 @@ type Recipe {
 scalar Date
 
 type Query {
-  user(where: UserWhereUniqueInput!): User
+  aggregateUser(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int): AggregateUser!
   findFirstUser(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): User
   users(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): [User!]!
-  aggregateUser(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int): AggregateUser!
+  user(where: UserWhereUniqueInput!): User
   groupByUser(where: UserWhereInput, orderBy: [UserOrderByWithAggregationInput!], by: [UserScalarFieldEnum!]!, having: UserScalarWhereWithAggregatesInput, take: Int, skip: Int): [UserGroupBy!]!
   recipe(id: String!): Recipe!
   recipes(skip: Int = 0, take: Int = 25): [Recipe!]!
 }
 
-type User {
+type AggregateUser {
+  _count: UserCountAggregate
+  _avg: UserAvgAggregate
+  _sum: UserSumAggregate
+  _min: UserMinAggregate
+  _max: UserMaxAggregate
+}
+
+type UserCountAggregate {
   id: Int!
-  email: String!
+  email: Int!
+  username: Int!
+  password: Int!
+  firstName: Int!
+  lastName: Int!
+  lastLogin: Int!
+  isSuperuser: Int!
+  isStaff: Int!
+  isActive: Int!
+  dateJoined: Int!
+  dateOfBirth: Int!
+  _all: Int!
+}
+
+type UserAvgAggregate {
+  id: Float
+}
+
+type UserSumAggregate {
+  id: Int
+}
+
+type UserMinAggregate {
+  id: Int
+  email: String
   username: String
-  password: String!
+  password: String
   firstName: String
   lastName: String
-  lastLogin: Date!
-  isSuperuser: Boolean!
-  isStaff: Boolean!
-  isActive: Boolean!
-  dateJoined: Date!
+  lastLogin: Date
+  isSuperuser: Boolean
+  isStaff: Boolean
+  isActive: Boolean
+  dateJoined: Date
   dateOfBirth: Date
 }
 
-input UserWhereUniqueInput {
+type UserMaxAggregate {
   id: Int
   email: String
+  username: String
+  password: String
+  firstName: String
+  lastName: String
+  lastLogin: Date
+  isSuperuser: Boolean
+  isStaff: Boolean
+  isActive: Boolean
+  dateJoined: Date
+  dateOfBirth: Date
 }
 
 input UserWhereInput {
@@ -213,6 +255,26 @@ enum SortOrder {
   desc
 }
 
+input UserWhereUniqueInput {
+  id: Int
+  email: String
+}
+
+type User {
+  id: Int!
+  email: String!
+  username: String
+  password: String!
+  firstName: String
+  lastName: String
+  lastLogin: Date!
+  isSuperuser: Boolean!
+  isStaff: Boolean!
+  isActive: Boolean!
+  dateJoined: Date!
+  dateOfBirth: Date
+}
+
 enum UserScalarFieldEnum {
   id
   email
@@ -226,68 +288,6 @@ enum UserScalarFieldEnum {
   isActive
   dateJoined
   dateOfBirth
-}
-
-type AggregateUser {
-  _count: UserCountAggregate
-  _avg: UserAvgAggregate
-  _sum: UserSumAggregate
-  _min: UserMinAggregate
-  _max: UserMaxAggregate
-}
-
-type UserCountAggregate {
-  id: Int!
-  email: Int!
-  username: Int!
-  password: Int!
-  firstName: Int!
-  lastName: Int!
-  lastLogin: Int!
-  isSuperuser: Int!
-  isStaff: Int!
-  isActive: Int!
-  dateJoined: Int!
-  dateOfBirth: Int!
-  _all: Int!
-}
-
-type UserAvgAggregate {
-  id: Float
-}
-
-type UserSumAggregate {
-  id: Int
-}
-
-type UserMinAggregate {
-  id: Int
-  email: String
-  username: String
-  password: String
-  firstName: String
-  lastName: String
-  lastLogin: Date
-  isSuperuser: Boolean
-  isStaff: Boolean
-  isActive: Boolean
-  dateJoined: Date
-  dateOfBirth: Date
-}
-
-type UserMaxAggregate {
-  id: Int
-  email: String
-  username: String
-  password: String
-  firstName: String
-  lastName: String
-  lastLogin: Date
-  isSuperuser: Boolean
-  isStaff: Boolean
-  isActive: Boolean
-  dateJoined: Date
-  dateOfBirth: Date
 }
 
 type UserGroupBy {
@@ -596,12 +596,12 @@ input NestedDateTimeNullableWithAggregatesFilter {
 }
 
 type Mutation {
-  createUser(data: UserCreateInput!): User!
-  deleteUser(where: UserWhereUniqueInput!): User
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  createOneUser(data: UserCreateInput!): User!
   deleteManyUser(where: UserWhereInput): AffectedRowsOutput!
+  deleteOneUser(where: UserWhereUniqueInput!): User
   updateManyUser(data: UserUpdateManyMutationInput!, where: UserWhereInput): AffectedRowsOutput!
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  upsertOneUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   addRecipe(newRecipeData: NewRecipeInput!): Recipe!
   removeRecipe(id: String!): Boolean!
 }
@@ -620,7 +620,11 @@ input UserCreateInput {
   dateOfBirth: Date
 }
 
-input UserUpdateInput {
+type AffectedRowsOutput {
+  count: Int!
+}
+
+input UserUpdateManyMutationInput {
   email: StringFieldUpdateOperationsInput
   username: NullableStringFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
@@ -654,11 +658,7 @@ input NullableDateTimeFieldUpdateOperationsInput {
   set: Date
 }
 
-type AffectedRowsOutput {
-  count: Int!
-}
-
-input UserUpdateManyMutationInput {
+input UserUpdateInput {
   email: StringFieldUpdateOperationsInput
   username: NullableStringFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
