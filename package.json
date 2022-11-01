@@ -44,7 +44,7 @@
     "type-graphql": "^1.1.1"
   },
   "devDependencies": {
-    "@nestjs/cli": "8.2.0",
+    "@nestjs/cli": "8.2.8",
     "@nestjs/schematics": "8.0.6",
     "@nestjs/testing": "8.2.6",
     "@prisma/generator-helper": "~4.5.0",
