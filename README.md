@@ -22,6 +22,8 @@ http://localhost:3000/graphql - graphql gui
 
 https://endykaufman-typegraphql-prisma-nestjs-example.glitch.me/graphql - online graphql gui
 
+https://github.com/EndyKaufman/typegraphql-prisma-nestjs-example/tree/master/src/dal - generated files for this example application
+
 ## Example of queries
 
 ### Mutation by Prisma2 + TypeGraphQL generator = Generated Crud
@@ -30,13 +32,11 @@ Query
 
 ```graphql
 mutation {
-  createOneUser(
-    data: { username: "user", email: "user@user.com", password: "secret" }
-  ) {
-    email
-    username
-    password
-  }
+    createOneUser(data: { username: "user", email: "user@user.com", password: "secret" }) {
+        email
+        username
+        password
+    }
 }
 ```
 
@@ -60,11 +60,11 @@ Query
 
 ```graphql
 query {
-  users {
-    id
-    email
-    password
-  }
+    users {
+        id
+        email
+        password
+    }
 }
 ```
 
@@ -90,10 +90,10 @@ Query
 
 ```graphql
 query {
-  recipes(skip:0) {
-    title
-    ingredients
-  }
+    recipes(skip: 0) {
+        title
+        ingredients
+    }
 }
 ```
 
