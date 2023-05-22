@@ -1,18 +1,17 @@
 import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import type { GraphQLResolveInfo } from "graphql";
-import { UpdateManyUserArgs } from "./args/UpdateManyUserArgs";
+import { FindFirstUserOrThrowArgs } from "./args/FindFirstUserOrThrowArgs";
 import { User } from "../../../models/User";
-import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @Resolver(_of => User)
-export class UpdateManyUserResolver {
-  @Mutation(_returns => AffectedRowsOutput, {
-    nullable: false
+export class FindFirstUserOrThrowResolver {
+  @Query(_returns => User, {
+    nullable: true
   })
-  async updateManyUser(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: UpdateManyUserArgs): Promise<AffectedRowsOutput> {
+  async findFirstUserOrThrow(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: FindFirstUserOrThrowArgs): Promise<User | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
-    return getPrismaFromContext(ctx).user.updateMany({
+    return getPrismaFromContext(ctx).user.findFirstOrThrow({
       ...args,
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });
