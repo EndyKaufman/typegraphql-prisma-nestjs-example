@@ -240,21 +240,31 @@ input NestedDateTimeNullableFilter {
 input UserOrderByWithRelationInput {
   id: SortOrder
   email: SortOrder
-  username: SortOrder
+  username: SortOrderInput
   password: SortOrder
-  firstName: SortOrder
-  lastName: SortOrder
+  firstName: SortOrderInput
+  lastName: SortOrderInput
   lastLogin: SortOrder
   isSuperuser: SortOrder
   isStaff: SortOrder
   isActive: SortOrder
   dateJoined: SortOrder
-  dateOfBirth: SortOrder
+  dateOfBirth: SortOrderInput
 }
 
 enum SortOrder {
   asc
   desc
+}
+
+input SortOrderInput {
+  sort: SortOrder!
+  nulls: NullsOrder
+}
+
+enum NullsOrder {
+  first
+  last
 }
 
 input UserWhereUniqueInput {
@@ -315,16 +325,16 @@ type UserGroupBy {
 input UserOrderByWithAggregationInput {
   id: SortOrder
   email: SortOrder
-  username: SortOrder
+  username: SortOrderInput
   password: SortOrder
-  firstName: SortOrder
-  lastName: SortOrder
+  firstName: SortOrderInput
+  lastName: SortOrderInput
   lastLogin: SortOrder
   isSuperuser: SortOrder
   isStaff: SortOrder
   isActive: SortOrder
   dateJoined: SortOrder
-  dateOfBirth: SortOrder
+  dateOfBirth: SortOrderInput
   _count: UserCountOrderByAggregateInput
   _avg: UserAvgOrderByAggregateInput
   _max: UserMaxOrderByAggregateInput

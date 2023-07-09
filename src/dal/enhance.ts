@@ -284,6 +284,7 @@ const inputsInfo = {
   DateTimeFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "not"],
   BoolFilter: ["equals", "not"],
   DateTimeNullableFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "not"],
+  SortOrderInput: ["sort", "nulls"],
   UserCountOrderByAggregateInput: ["id", "email", "username", "password", "firstName", "lastName", "lastLogin", "isSuperuser", "isStaff", "isActive", "dateJoined", "dateOfBirth"],
   UserAvgOrderByAggregateInput: ["id"],
   UserMaxOrderByAggregateInput: ["id", "email", "username", "password", "firstName", "lastName", "lastLogin", "isSuperuser", "isStaff", "isActive", "dateJoined", "dateOfBirth"],

@@ -2,6 +2,7 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { SortOrderInput } from "../inputs/SortOrderInput";
 import { UserAvgOrderByAggregateInput } from "../inputs/UserAvgOrderByAggregateInput";
 import { UserCountOrderByAggregateInput } from "../inputs/UserCountOrderByAggregateInput";
 import { UserMaxOrderByAggregateInput } from "../inputs/UserMaxOrderByAggregateInput";
@@ -23,25 +24,25 @@ export class UserOrderByWithAggregationInput {
   })
   email?: "asc" | "desc" | undefined;
 
-  @Field(_type => SortOrder, {
+  @Field(_type => SortOrderInput, {
     nullable: true
   })
-  username?: "asc" | "desc" | undefined;
+  username?: SortOrderInput | undefined;
 
   @Field(_type => SortOrder, {
     nullable: true
   })
   password?: "asc" | "desc" | undefined;
 
-  @Field(_type => SortOrder, {
+  @Field(_type => SortOrderInput, {
     nullable: true
   })
-  firstName?: "asc" | "desc" | undefined;
+  firstName?: SortOrderInput | undefined;
 
-  @Field(_type => SortOrder, {
+  @Field(_type => SortOrderInput, {
     nullable: true
   })
-  lastName?: "asc" | "desc" | undefined;
+  lastName?: SortOrderInput | undefined;
 
   @Field(_type => SortOrder, {
     nullable: true
@@ -68,10 +69,10 @@ export class UserOrderByWithAggregationInput {
   })
   dateJoined?: "asc" | "desc" | undefined;
 
-  @Field(_type => SortOrder, {
+  @Field(_type => SortOrderInput, {
     nullable: true
   })
-  dateOfBirth?: "asc" | "desc" | undefined;
+  dateOfBirth?: SortOrderInput | undefined;
 
   @Field(_type => UserCountOrderByAggregateInput, {
     nullable: true

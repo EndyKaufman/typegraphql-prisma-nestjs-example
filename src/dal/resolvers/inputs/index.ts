@@ -25,6 +25,7 @@ export { NestedStringNullableWithAggregatesFilter } from "./NestedStringNullable
 export { NestedStringWithAggregatesFilter } from "./NestedStringWithAggregatesFilter";
 export { NullableDateTimeFieldUpdateOperationsInput } from "./NullableDateTimeFieldUpdateOperationsInput";
 export { NullableStringFieldUpdateOperationsInput } from "./NullableStringFieldUpdateOperationsInput";
+export { SortOrderInput } from "./SortOrderInput";
 export { StringFieldUpdateOperationsInput } from "./StringFieldUpdateOperationsInput";
 export { StringFilter } from "./StringFilter";
 export { StringNullableFilter } from "./StringNullableFilter";
