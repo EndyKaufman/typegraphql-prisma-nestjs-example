@@ -3,7 +3,7 @@ import type { GraphQLResolveInfo } from "graphql";
 import { DeleteManyUserArgs } from "./args/DeleteManyUserArgs";
 import { User } from "../../../models/User";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { transformArgsIntoPrismaArgs, transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @Resolver(_of => User)
 export class DeleteManyUserResolver {
@@ -13,7 +13,7 @@ export class DeleteManyUserResolver {
   async deleteManyUser(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: DeleteManyUserArgs): Promise<AffectedRowsOutput> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.deleteMany({
-      ...args,
+      ...transformArgsIntoPrismaArgs(info, args, ctx),
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });
   }

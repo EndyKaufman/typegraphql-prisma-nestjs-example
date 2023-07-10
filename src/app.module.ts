@@ -1,11 +1,20 @@
 import { Module, Provider } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { PrismaClient } from '@prisma/client';
-import { crudResolvers, resolvers } from './dal';
+import { GraphQLResolveInfo } from 'graphql';
+import { CreateOneUserArgs, UserCrudResolver, crudResolvers } from './dal';
+import { setTransformArgsIntoPrismaArgs } from './dal/helpers';
 import { RecipesModule } from './recipes/recipes.module';
 
 const prisma = new PrismaClient({
     log: ['query'],
+});
+
+setTransformArgsIntoPrismaArgs((info: GraphQLResolveInfo, args: any, ctx: any) => {
+    if (info.fieldName === UserCrudResolver.prototype.createOneUser.name && ctx.req.headers.email) {
+        (args as CreateOneUserArgs).data.email = ctx.req.headers.email;
+    }
+    return args;
 });
 
 @Module({
@@ -20,6 +29,6 @@ const prisma = new PrismaClient({
             context: ({ req }) => ({ req, prisma }),
         }),
     ],
-    providers: (crudResolvers as unknown) as Provider<any>[],
+    providers: crudResolvers as unknown as Provider<any>[],
 })
 export class AppModule {}

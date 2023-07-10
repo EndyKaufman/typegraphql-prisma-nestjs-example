@@ -2,7 +2,7 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import type { GraphQLResolveInfo } from "graphql";
 import { UpsertOneUserArgs } from "./args/UpsertOneUserArgs";
 import { User } from "../../../models/User";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { transformArgsIntoPrismaArgs, transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @Resolver(_of => User)
 export class UpsertOneUserResolver {
@@ -12,7 +12,7 @@ export class UpsertOneUserResolver {
   async upsertOneUser(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: UpsertOneUserArgs): Promise<User> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.upsert({
-      ...args,
+      ...transformArgsIntoPrismaArgs(info, args, ctx),
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });
   }

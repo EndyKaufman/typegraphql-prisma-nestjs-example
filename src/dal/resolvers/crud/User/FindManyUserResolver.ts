@@ -2,7 +2,7 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import type { GraphQLResolveInfo } from "graphql";
 import { FindManyUserArgs } from "./args/FindManyUserArgs";
 import { User } from "../../../models/User";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { transformArgsIntoPrismaArgs, transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @Resolver(_of => User)
 export class FindManyUserResolver {
@@ -12,7 +12,7 @@ export class FindManyUserResolver {
   async users(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: FindManyUserArgs): Promise<User[]> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findMany({
-      ...args,
+      ...transformArgsIntoPrismaArgs(info, args, ctx),
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });
   }

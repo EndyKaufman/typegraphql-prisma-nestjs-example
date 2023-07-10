@@ -2,7 +2,7 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import type { GraphQLResolveInfo } from "graphql";
 import { FindUniqueUserArgs } from "./args/FindUniqueUserArgs";
 import { User } from "../../../models/User";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { transformArgsIntoPrismaArgs, transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @Resolver(_of => User)
 export class FindUniqueUserResolver {
@@ -12,7 +12,7 @@ export class FindUniqueUserResolver {
   async user(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: FindUniqueUserArgs): Promise<User | null> {
     const { _count } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.findUnique({
-      ...args,
+      ...transformArgsIntoPrismaArgs(info, args, ctx),
       ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
     });
   }

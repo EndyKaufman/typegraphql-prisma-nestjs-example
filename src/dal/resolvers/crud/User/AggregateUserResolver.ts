@@ -3,7 +3,7 @@ import type { GraphQLResolveInfo } from "graphql";
 import { AggregateUserArgs } from "./args/AggregateUserArgs";
 import { User } from "../../../models/User";
 import { AggregateUser } from "../../outputs/AggregateUser";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { transformArgsIntoPrismaArgs, transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @Resolver(_of => User)
 export class AggregateUserResolver {
@@ -12,7 +12,7 @@ export class AggregateUserResolver {
   })
   async aggregateUser(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregateUserArgs): Promise<AggregateUser> {
     return getPrismaFromContext(ctx).user.aggregate({
-      ...args,
+      ...transformArgsIntoPrismaArgs(info, args, ctx),
       ...transformInfoIntoPrismaArgs(info),
     });
   }

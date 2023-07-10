@@ -56,6 +56,15 @@ export function transformCountFieldIntoSelectRelationsCount(_count: object) {
   }
 }
 
+export let transformArgsIntoPrismaArgs = function <TArgs = Record<string, any>, TContext = any>(info: GraphQLResolveInfo, args: TArgs, ctx: TContext): TArgs {
+  return args;
+};
+
+export function setTransformArgsIntoPrismaArgs(newTransformArgsIntoPrismaArgs: typeof transformArgsIntoPrismaArgs) {
+  transformArgsIntoPrismaArgs = newTransformArgsIntoPrismaArgs;
+}
+
+
 
 
 

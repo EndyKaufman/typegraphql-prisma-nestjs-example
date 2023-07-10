@@ -3,7 +3,7 @@ import type { GraphQLResolveInfo } from "graphql";
 import { GroupByUserArgs } from "./args/GroupByUserArgs";
 import { User } from "../../../models/User";
 import { UserGroupBy } from "../../outputs/UserGroupBy";
-import { transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { transformArgsIntoPrismaArgs, transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
 
 @Resolver(_of => User)
 export class GroupByUserResolver {
@@ -13,7 +13,7 @@ export class GroupByUserResolver {
   async groupByUser(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: GroupByUserArgs): Promise<UserGroupBy[]> {
     const { _count, _avg, _sum, _min, _max } = transformInfoIntoPrismaArgs(info);
     return getPrismaFromContext(ctx).user.groupBy({
-      ...args,
+      ...transformArgsIntoPrismaArgs(info, args, ctx),
       ...Object.fromEntries(
         Object.entries({ _count, _avg, _sum, _min, _max }).filter(([_, v]) => v != null)
       ),

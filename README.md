@@ -115,6 +115,51 @@ Result
 }
 ```
 
+### Mutation by Prisma2 + TypeGraphQL generator + use data from headers in data for insert to prisma = Generated Crud
+
+Rule:
+
+```ts
+setTransformArgsIntoPrismaArgs((info: GraphQLResolveInfo, args: any, ctx: any) => {
+    if (info.fieldName === UserCrudResolver.prototype.createOneUser.name && ctx.req.headers.email) {
+        (args as CreateOneUserArgs).data.email = ctx.req.headers.email;
+    }
+    return args;
+});
+```
+
+Query
+
+```graphql
+mutation {
+    createOneUser(data: { username: "user", email: "user@user.com", password: "secret" }) {
+        email
+        username
+        password
+    }
+}
+```
+
+Http headers:
+
+```js
+{"email":"newnew"}
+```
+
+Result
+
+```js
+{
+  "data": {
+    "createUser": {
+      "email": "newnew",
+      "username": "user",
+      "password": "secret"
+    }
+  }
+}
+```
+
 ## Links
 
 https://github.com/nestjs/nest/tree/master/sample/23-type-graphql
