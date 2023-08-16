@@ -270,6 +270,19 @@ enum NullsOrder {
 input UserWhereUniqueInput {
   id: Int
   email: String
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+  username: StringNullableFilter
+  password: StringFilter
+  firstName: StringNullableFilter
+  lastName: StringNullableFilter
+  lastLogin: DateTimeFilter
+  isSuperuser: BoolFilter
+  isStaff: BoolFilter
+  isActive: BoolFilter
+  dateJoined: DateTimeFilter
+  dateOfBirth: DateTimeNullableFilter
 }
 
 type User {
