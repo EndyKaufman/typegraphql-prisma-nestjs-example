@@ -10,10 +10,13 @@ export class FindManyUserResolver {
     nullable: false
   })
   async users(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: FindManyUserArgs): Promise<User[]> {
-    const { _count } = transformInfoIntoPrismaArgs(info);
-    return getPrismaFromContext(ctx).user.findMany({
-      ...transformArgsIntoPrismaArgs(info, args, ctx),
-      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
-    });
+    const afterProcessEvents: ((result: any) => Promise<any>)[] = [];
+    const { _count } = transformInfoIntoPrismaArgs(info, 'User', 'user', 'findMany');
+    const transformedArgsIntoPrismaArgs = await transformArgsIntoPrismaArgs(info, args, ctx, 'User', 'user', 'findMany', afterProcessEvents);
+    const otherArgs = _count && transformCountFieldIntoSelectRelationsCount(_count, 'User', 'user', 'findMany');
+    const result = await getPrismaFromContext(ctx).user.findMany({ ...transformedArgsIntoPrismaArgs, ...otherArgs, });
+    for (const afterProcessEvent of afterProcessEvents) { await afterProcessEvent(result); }
+
+    return result;
   }
 }

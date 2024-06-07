@@ -10,10 +10,13 @@ export class DeleteOneUserResolver {
     nullable: true
   })
   async deleteOneUser(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: DeleteOneUserArgs): Promise<User | null> {
-    const { _count } = transformInfoIntoPrismaArgs(info);
-    return getPrismaFromContext(ctx).user.delete({
-      ...transformArgsIntoPrismaArgs(info, args, ctx),
-      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
-    });
+    const afterProcessEvents: ((result: any) => Promise<any>)[] = [];
+    const { _count } = transformInfoIntoPrismaArgs(info, 'User', 'user', 'delete');
+    const transformedArgsIntoPrismaArgs = await transformArgsIntoPrismaArgs(info, args, ctx, 'User', 'user', 'delete', afterProcessEvents);
+    const otherArgs = _count && transformCountFieldIntoSelectRelationsCount(_count, 'User', 'user', 'delete');
+    const result = await getPrismaFromContext(ctx).user.delete({ ...transformedArgsIntoPrismaArgs, ...otherArgs, });
+    for (const afterProcessEvent of afterProcessEvents) { await afterProcessEvent(result); }
+
+    return result;
   }
 }

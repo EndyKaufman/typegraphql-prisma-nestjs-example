@@ -11,9 +11,12 @@ export class AggregateUserResolver {
     nullable: false
   })
   async aggregateUser(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: AggregateUserArgs): Promise<AggregateUser> {
-    return getPrismaFromContext(ctx).user.aggregate({
-      ...transformArgsIntoPrismaArgs(info, args, ctx),
-      ...transformInfoIntoPrismaArgs(info),
-    });
+    const afterProcessEvents: ((result: any) => Promise<any>)[] = [];
+    const transformedArgsIntoPrismaArgs = await transformArgsIntoPrismaArgs(info, args, ctx, 'User', 'user', 'aggregate', afterProcessEvents);
+    const transformedInfoIntoPrismaArgs = transformInfoIntoPrismaArgs(info, 'User', 'user', 'aggregate');
+    const result = await getPrismaFromContext(ctx).user.aggregate({ ...transformedArgsIntoPrismaArgs, ...transformedInfoIntoPrismaArgs, });
+    for (const afterProcessEvent of afterProcessEvents) { await afterProcessEvent(result); }
+
+    return result;
   }
 }

@@ -10,10 +10,13 @@ export class UpdateOneUserResolver {
     nullable: true
   })
   async updateOneUser(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: UpdateOneUserArgs): Promise<User | null> {
-    const { _count } = transformInfoIntoPrismaArgs(info);
-    return getPrismaFromContext(ctx).user.update({
-      ...transformArgsIntoPrismaArgs(info, args, ctx),
-      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
-    });
+    const afterProcessEvents: ((result: any) => Promise<any>)[] = [];
+    const { _count } = transformInfoIntoPrismaArgs(info, 'User', 'user', 'update');
+    const transformedArgsIntoPrismaArgs = await transformArgsIntoPrismaArgs(info, args, ctx, 'User', 'user', 'update', afterProcessEvents);
+    const otherArgs = _count && transformCountFieldIntoSelectRelationsCount(_count, 'User', 'user', 'update');
+    const result = await getPrismaFromContext(ctx).user.update({ ...transformedArgsIntoPrismaArgs, ...otherArgs, });
+    for (const afterProcessEvent of afterProcessEvents) { await afterProcessEvent(result); }
+
+    return result;
   }
 }

@@ -10,10 +10,13 @@ export class FindUniqueUserResolver {
     nullable: true
   })
   async user(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: FindUniqueUserArgs): Promise<User | null> {
-    const { _count } = transformInfoIntoPrismaArgs(info);
-    return getPrismaFromContext(ctx).user.findUnique({
-      ...transformArgsIntoPrismaArgs(info, args, ctx),
-      ...(_count && transformCountFieldIntoSelectRelationsCount(_count)),
-    });
+    const afterProcessEvents: ((result: any) => Promise<any>)[] = [];
+    const { _count } = transformInfoIntoPrismaArgs(info, 'User', 'user', 'findUnique');
+    const transformedArgsIntoPrismaArgs = await transformArgsIntoPrismaArgs(info, args, ctx, 'User', 'user', 'findUnique', afterProcessEvents);
+    const otherArgs = _count && transformCountFieldIntoSelectRelationsCount(_count, 'User', 'user', 'findUnique');
+    const result = await getPrismaFromContext(ctx).user.findUnique({ ...transformedArgsIntoPrismaArgs, ...otherArgs, });
+    for (const afterProcessEvent of afterProcessEvents) { await afterProcessEvent(result); }
+
+    return result;
   }
 }

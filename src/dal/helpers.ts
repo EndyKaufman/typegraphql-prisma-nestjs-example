@@ -1,7 +1,7 @@
 import type { GraphQLResolveInfo } from "graphql";
 import * as graphqlFields from "graphql-fields";
 
-export function transformInfoIntoPrismaArgs(info: GraphQLResolveInfo): Record<string, any> {
+export function transformInfoIntoPrismaArgs(info: GraphQLResolveInfo, modelName?: string, collectionName?: string, prismaMethod?: string): Record<string, any> {
   const fields: Record<string, any> = graphqlFields(
     // suppress GraphQLResolveInfo types issue
     info as any,
@@ -11,10 +11,10 @@ export function transformInfoIntoPrismaArgs(info: GraphQLResolveInfo): Record<st
       processArguments: true,
     }
   );
-  return transformFields(fields);
+  return transformFields(fields, modelName, collectionName, prismaMethod);
 }
 
-function transformFields(fields: Record<string, any>): Record<string, any> {
+function transformFields(fields: Record<string, any>, modelName?: string, collectionName?: string, prismaMethod?: string): Record<string, any> {
   return Object.fromEntries(
     Object.entries(fields)
       .map<[string, any]>(([key, value]) => {
@@ -29,7 +29,7 @@ function transformFields(fields: Record<string, any>): Record<string, any> {
             })
           )];
         }
-        return [key, transformFields(value)];
+        return [key, transformFields(value, modelName, collectionName, prismaMethod)];
       }),
   );
 }
@@ -42,7 +42,7 @@ export function getPrismaFromContext(context: any) {
   return prismaClient;
 }
 
-export function transformCountFieldIntoSelectRelationsCount(_count: object) {
+export function transformCountFieldIntoSelectRelationsCount(_count: object, modelName?: string, collectionName?: string, prismaMethod?: string) {
   return {
     include: {
       _count: {
@@ -56,7 +56,7 @@ export function transformCountFieldIntoSelectRelationsCount(_count: object) {
   }
 }
 
-export let transformArgsIntoPrismaArgs = function <TArgs = Record<string, any>, TContext = any>(info: GraphQLResolveInfo, args: TArgs, ctx: TContext): TArgs {
+export let transformArgsIntoPrismaArgs = async function <TArgs = Record<string, any>, TContext = any>(info: GraphQLResolveInfo, args: TArgs, ctx: TContext, modelName?: string, collectionName?: string, prismaMethod?: string, afterProcessEvents?: ((result: any) => Promise<any>)[]): Promise<TArgs> {
   return args;
 };
 

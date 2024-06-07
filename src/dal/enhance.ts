@@ -182,7 +182,7 @@ function applyTypeClassEnhanceConfig<
   }
 }
 
-const modelsInfo = {
+export const modelsInfo = {
   User: ["id", "email", "username", "password", "firstName", "lastName", "lastLogin", "isSuperuser", "isStaff", "isActive", "dateJoined", "dateOfBirth"]
 };
 

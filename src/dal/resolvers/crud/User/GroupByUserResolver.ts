@@ -11,12 +11,13 @@ export class GroupByUserResolver {
     nullable: false
   })
   async groupByUser(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: GroupByUserArgs): Promise<UserGroupBy[]> {
-    const { _count, _avg, _sum, _min, _max } = transformInfoIntoPrismaArgs(info);
-    return getPrismaFromContext(ctx).user.groupBy({
-      ...transformArgsIntoPrismaArgs(info, args, ctx),
-      ...Object.fromEntries(
-        Object.entries({ _count, _avg, _sum, _min, _max }).filter(([_, v]) => v != null)
-      ),
-    });
+    const afterProcessEvents: ((result: any) => Promise<any>)[] = [];
+    const { _count, _avg, _sum, _min, _max } = transformInfoIntoPrismaArgs(info, 'User', 'user', 'groupBy');
+    const transformedArgsIntoPrismaArgs = await transformArgsIntoPrismaArgs(info, args, ctx, 'User', 'user', 'groupBy', afterProcessEvents);
+    const groupByArgs = Object.fromEntries(Object.entries({ _count, _avg, _sum, _min, _max }).filter(([_, v]) => v != null));
+    const result = await getPrismaFromContext(ctx).user.groupBy({ ...transformedArgsIntoPrismaArgs, ...groupByArgs, });
+    for (const afterProcessEvent of afterProcessEvents) { await afterProcessEvent(result); }
+
+    return result;
   }
 }
