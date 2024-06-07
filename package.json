@@ -26,7 +26,7 @@
     "prisma:silent-watch": "npm run prisma -- generate -- --watch &"
   },
   "dependencies": {
-    "@nestjs/common": "8.2.6",
+    "@nestjs/common": "9.0.0",
     "@nestjs/core": "8.2.6",
     "@nestjs/graphql": "8.0.2",
     "@nestjs/platform-express": "8.2.6",
