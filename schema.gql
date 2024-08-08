@@ -22,7 +22,7 @@ type Query {
   getUser(where: UserWhereUniqueInput!): User
   groupByUser(where: UserWhereInput, orderBy: [UserOrderByWithAggregationInput!], by: [UserScalarFieldEnum!]!, having: UserScalarWhereWithAggregatesInput, take: Int, skip: Int): [UserGroupBy!]!
   recipe(id: String!): Recipe!
-  recipes(skip: Int = 0, take: Int = 25): [Recipe!]!
+  recipes(skip: Int! = 0, take: Int! = 25): [Recipe!]!
 }
 
 type AggregateUser {
@@ -621,6 +621,8 @@ input NestedDateTimeNullableWithAggregatesFilter {
 }
 
 type Mutation {
+  createManyUser(data: [UserCreateManyInput!]!): AffectedRowsOutput!
+  createManyAndReturnUser(data: [UserCreateManyInput!]!): [CreateManyAndReturnUser!]!
   createOneUser(data: UserCreateInput!): User!
   deleteManyUser(where: UserWhereInput): AffectedRowsOutput!
   deleteOneUser(where: UserWhereUniqueInput!): User
@@ -629,6 +631,40 @@ type Mutation {
   upsertOneUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   addRecipe(newRecipeData: NewRecipeInput!): Recipe!
   removeRecipe(id: String!): Boolean!
+}
+
+type AffectedRowsOutput {
+  count: Int!
+}
+
+input UserCreateManyInput {
+  id: Int
+  email: String!
+  username: String
+  password: String!
+  firstName: String
+  lastName: String
+  lastLogin: Date
+  isSuperuser: Boolean
+  isStaff: Boolean
+  isActive: Boolean
+  dateJoined: Date
+  dateOfBirth: Date
+}
+
+type CreateManyAndReturnUser {
+  id: Int!
+  email: String!
+  username: String
+  password: String!
+  firstName: String
+  lastName: String
+  lastLogin: Date!
+  isSuperuser: Boolean!
+  isStaff: Boolean!
+  isActive: Boolean!
+  dateJoined: Date!
+  dateOfBirth: Date
 }
 
 input UserCreateInput {
@@ -643,10 +679,6 @@ input UserCreateInput {
   isActive: Boolean
   dateJoined: Date
   dateOfBirth: Date
-}
-
-type AffectedRowsOutput {
-  count: Int!
 }
 
 input UserUpdateManyMutationInput {

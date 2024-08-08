@@ -34,6 +34,7 @@ export { StringWithAggregatesFilter } from "./StringWithAggregatesFilter";
 export { UserAvgOrderByAggregateInput } from "./UserAvgOrderByAggregateInput";
 export { UserCountOrderByAggregateInput } from "./UserCountOrderByAggregateInput";
 export { UserCreateInput } from "./UserCreateInput";
+export { UserCreateManyInput } from "./UserCreateManyInput";
 export { UserMaxOrderByAggregateInput } from "./UserMaxOrderByAggregateInput";
 export { UserMinOrderByAggregateInput } from "./UserMinOrderByAggregateInput";
 export { UserOrderByWithAggregationInput } from "./UserOrderByWithAggregationInput";

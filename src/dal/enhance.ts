@@ -15,6 +15,8 @@ const crudResolversMap = {
 const actionResolversMap = {
   User: {
     aggregateUser: actionResolvers.AggregateUserResolver,
+    createManyUser: actionResolvers.CreateManyUserResolver,
+    createManyAndReturnUser: actionResolvers.CreateManyAndReturnUserResolver,
     createOneUser: actionResolvers.CreateOneUserResolver,
     deleteManyUser: actionResolvers.DeleteManyUserResolver,
     deleteOneUser: actionResolvers.DeleteOneUserResolver,
@@ -30,10 +32,12 @@ const actionResolversMap = {
   }
 };
 const crudResolversInfo = {
-  User: ["aggregateUser", "createOneUser", "deleteManyUser", "deleteOneUser", "findFirstUser", "findFirstUserOrThrow", "users", "user", "getUser", "groupByUser", "updateManyUser", "updateOneUser", "upsertOneUser"]
+  User: ["aggregateUser", "createManyUser", "createManyAndReturnUser", "createOneUser", "deleteManyUser", "deleteOneUser", "findFirstUser", "findFirstUserOrThrow", "users", "user", "getUser", "groupByUser", "updateManyUser", "updateOneUser", "upsertOneUser"]
 };
 const argsInfo = {
   AggregateUserArgs: ["where", "orderBy", "cursor", "take", "skip"],
+  CreateManyUserArgs: ["data"],
+  CreateManyAndReturnUserArgs: ["data"],
   CreateOneUserArgs: ["data"],
   DeleteManyUserArgs: ["where"],
   DeleteOneUserArgs: ["where"],
@@ -71,7 +75,7 @@ export function applyResolversEnhanceMap(
   resolversEnhanceMap: ResolversEnhanceMap,
 ) {
   const mutationOperationPrefixes = [
-    "createOne", "createMany", "deleteOne", "updateOne", "deleteMany", "updateMany", "upsertOne"
+    "createOne", "createMany", "createManyAndReturn", "deleteOne", "updateOne", "deleteMany", "updateMany", "upsertOne"
   ];
   for (const resolversEnhanceMapKey of Object.keys(resolversEnhanceMap)) {
     const modelName = resolversEnhanceMapKey as keyof typeof resolversEnhanceMap;
@@ -229,7 +233,8 @@ const outputsInfo = {
   UserAvgAggregate: ["id"],
   UserSumAggregate: ["id"],
   UserMinAggregate: ["id", "email", "username", "password", "firstName", "lastName", "lastLogin", "isSuperuser", "isStaff", "isActive", "dateJoined", "dateOfBirth"],
-  UserMaxAggregate: ["id", "email", "username", "password", "firstName", "lastName", "lastLogin", "isSuperuser", "isStaff", "isActive", "dateJoined", "dateOfBirth"]
+  UserMaxAggregate: ["id", "email", "username", "password", "firstName", "lastName", "lastLogin", "isSuperuser", "isStaff", "isActive", "dateJoined", "dateOfBirth"],
+  CreateManyAndReturnUser: ["id", "email", "username", "password", "firstName", "lastName", "lastLogin", "isSuperuser", "isStaff", "isActive", "dateJoined", "dateOfBirth"]
 };
 
 type OutputTypesNames = keyof typeof outputTypes;
@@ -277,6 +282,7 @@ const inputsInfo = {
   UserScalarWhereWithAggregatesInput: ["AND", "OR", "NOT", "id", "email", "username", "password", "firstName", "lastName", "lastLogin", "isSuperuser", "isStaff", "isActive", "dateJoined", "dateOfBirth"],
   UserCreateInput: ["email", "username", "password", "firstName", "lastName", "lastLogin", "isSuperuser", "isStaff", "isActive", "dateJoined", "dateOfBirth"],
   UserUpdateInput: ["email", "username", "password", "firstName", "lastName", "lastLogin", "isSuperuser", "isStaff", "isActive", "dateJoined", "dateOfBirth"],
+  UserCreateManyInput: ["id", "email", "username", "password", "firstName", "lastName", "lastLogin", "isSuperuser", "isStaff", "isActive", "dateJoined", "dateOfBirth"],
   UserUpdateManyMutationInput: ["email", "username", "password", "firstName", "lastName", "lastLogin", "isSuperuser", "isStaff", "isActive", "dateJoined", "dateOfBirth"],
   IntFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "not"],
   StringFilter: ["equals", "in", "notIn", "lt", "lte", "gt", "gte", "contains", "startsWith", "endsWith", "not"],

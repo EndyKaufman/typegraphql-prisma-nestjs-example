@@ -1,6 +1,8 @@
 import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import type { GraphQLResolveInfo } from "graphql";
 import { AggregateUserArgs } from "./args/AggregateUserArgs";
+import { CreateManyAndReturnUserArgs } from "./args/CreateManyAndReturnUserArgs";
+import { CreateManyUserArgs } from "./args/CreateManyUserArgs";
 import { CreateOneUserArgs } from "./args/CreateOneUserArgs";
 import { DeleteManyUserArgs } from "./args/DeleteManyUserArgs";
 import { DeleteOneUserArgs } from "./args/DeleteOneUserArgs";
@@ -17,6 +19,7 @@ import { transformArgsIntoPrismaArgs, transformInfoIntoPrismaArgs, getPrismaFrom
 import { User } from "../../../models/User";
 import { AffectedRowsOutput } from "../../outputs/AffectedRowsOutput";
 import { AggregateUser } from "../../outputs/AggregateUser";
+import { CreateManyAndReturnUser } from "../../outputs/CreateManyAndReturnUser";
 import { UserGroupBy } from "../../outputs/UserGroupBy";
 
 @Resolver(_of => User)
@@ -29,6 +32,34 @@ export class UserCrudResolver {
     const transformedArgsIntoPrismaArgs = await transformArgsIntoPrismaArgs(info, args, ctx, 'User', 'user', 'aggregate', afterProcessEvents);
     const transformedInfoIntoPrismaArgs = transformInfoIntoPrismaArgs(info, 'User', 'user', 'aggregate');
     const result = await getPrismaFromContext(ctx).user.aggregate({ ...transformedArgsIntoPrismaArgs, ...transformedInfoIntoPrismaArgs, });
+    for (const afterProcessEvent of afterProcessEvents) { await afterProcessEvent(result); }
+
+    return result;
+  }
+
+  @Mutation(_returns => AffectedRowsOutput, {
+    nullable: false
+  })
+  async createManyUser(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: CreateManyUserArgs): Promise<AffectedRowsOutput> {
+    const afterProcessEvents: ((result: any) => Promise<any>)[] = [];
+    const { _count } = transformInfoIntoPrismaArgs(info, 'User', 'user', 'createMany');
+    const transformedArgsIntoPrismaArgs = await transformArgsIntoPrismaArgs(info, args, ctx, 'User', 'user', 'createMany', afterProcessEvents);
+    const otherArgs = _count && transformCountFieldIntoSelectRelationsCount(_count, 'User', 'user', 'createMany');
+    const result = await getPrismaFromContext(ctx).user.createMany({ ...transformedArgsIntoPrismaArgs, ...otherArgs, });
+    for (const afterProcessEvent of afterProcessEvents) { await afterProcessEvent(result); }
+
+    return result;
+  }
+
+  @Mutation(_returns => [CreateManyAndReturnUser], {
+    nullable: false
+  })
+  async createManyAndReturnUser(@Context() ctx: any, @Info() info: GraphQLResolveInfo, @Args() args: CreateManyAndReturnUserArgs): Promise<CreateManyAndReturnUser[]> {
+    const afterProcessEvents: ((result: any) => Promise<any>)[] = [];
+    const { _count } = transformInfoIntoPrismaArgs(info, 'User', 'user', 'createManyAndReturn');
+    const transformedArgsIntoPrismaArgs = await transformArgsIntoPrismaArgs(info, args, ctx, 'User', 'user', 'createManyAndReturn', afterProcessEvents);
+    const otherArgs = _count && transformCountFieldIntoSelectRelationsCount(_count, 'User', 'user', 'createManyAndReturn');
+    const result = await getPrismaFromContext(ctx).user.createManyAndReturn({ ...transformedArgsIntoPrismaArgs, ...otherArgs, });
     for (const afterProcessEvent of afterProcessEvents) { await afterProcessEvent(result); }
 
     return result;

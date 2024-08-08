@@ -1,4 +1,6 @@
 export { AggregateUserResolver } from "./User/AggregateUserResolver";
+export { CreateManyUserResolver } from "./User/CreateManyUserResolver";
+export { CreateManyAndReturnUserResolver } from "./User/CreateManyAndReturnUserResolver";
 export { CreateOneUserResolver } from "./User/CreateOneUserResolver";
 export { DeleteManyUserResolver } from "./User/DeleteManyUserResolver";
 export { DeleteOneUserResolver } from "./User/DeleteOneUserResolver";

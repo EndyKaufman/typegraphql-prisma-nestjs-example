@@ -5,6 +5,7 @@ import { GraphQLResolveInfo } from 'graphql';
 import { CreateOneUserArgs, UserCrudResolver, crudResolvers } from './dal';
 import { setTransformArgsIntoPrismaArgs } from './dal/helpers';
 import { RecipesModule } from './recipes/recipes.module';
+import { ApolloDriver } from '@nestjs/apollo';
 
 const prisma = new PrismaClient({
     log: ['query'],
@@ -21,6 +22,7 @@ setTransformArgsIntoPrismaArgs((info: GraphQLResolveInfo, args: any, ctx: any) =
     imports: [
         RecipesModule,
         GraphQLModule.forRoot({
+            driver: ApolloDriver,
             installSubscriptionHandlers: true,
             autoSchemaFile: 'schema.gql',
             debug: true,

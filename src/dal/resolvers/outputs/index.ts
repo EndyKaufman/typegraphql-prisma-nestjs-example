@@ -1,5 +1,6 @@
 export { AffectedRowsOutput } from "./AffectedRowsOutput";
 export { AggregateUser } from "./AggregateUser";
+export { CreateManyAndReturnUser } from "./CreateManyAndReturnUser";
 export { UserAvgAggregate } from "./UserAvgAggregate";
 export { UserCountAggregate } from "./UserCountAggregate";
 export { UserGroupBy } from "./UserGroupBy";
