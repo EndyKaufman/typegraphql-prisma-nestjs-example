@@ -30,7 +30,7 @@
     "@nestjs/common": "10.3.10",
     "@nestjs/core": "10.3.10",
     "@nestjs/graphql": "12.2.0",
-    "@nestjs/platform-express": "10.3.10",
+    "@nestjs/platform-express": "10.4.2",
     "@prisma/client": "~5.18.0",
     "@prisma/sdk": "~4.0.0",
     "apollo-server-express": "3.13.0",
