@@ -7,8 +7,4 @@ import { DecimalJSScalar } from "../../scalars";
   isAbstract: true
 })
 export class DateTimeFieldUpdateOperationsInput {
-  @Field(_type => Date, {
-    nullable: true
-  })
-  set?: Date | undefined;
 }

@@ -2,68 +2,63 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
-import { BoolFieldUpdateOperationsInput } from "../inputs/BoolFieldUpdateOperationsInput";
-import { DateTimeFieldUpdateOperationsInput } from "../inputs/DateTimeFieldUpdateOperationsInput";
-import { NullableDateTimeFieldUpdateOperationsInput } from "../inputs/NullableDateTimeFieldUpdateOperationsInput";
-import { NullableStringFieldUpdateOperationsInput } from "../inputs/NullableStringFieldUpdateOperationsInput";
-import { StringFieldUpdateOperationsInput } from "../inputs/StringFieldUpdateOperationsInput";
 
 @InputType("UserUpdateManyMutationInput", {
   isAbstract: true
 })
 export class UserUpdateManyMutationInput {
-  @Field(_type => StringFieldUpdateOperationsInput, {
+  @Field(_type => String, {
     nullable: true
   })
-  email?: StringFieldUpdateOperationsInput | undefined;
+  email?: string | undefined;
 
-  @Field(_type => NullableStringFieldUpdateOperationsInput, {
+  @Field(_type => String, {
     nullable: true
   })
-  username?: NullableStringFieldUpdateOperationsInput | undefined;
+  username?: string | undefined;
 
-  @Field(_type => StringFieldUpdateOperationsInput, {
+  @Field(_type => String, {
     nullable: true
   })
-  password?: StringFieldUpdateOperationsInput | undefined;
+  password?: string | undefined;
 
-  @Field(_type => NullableStringFieldUpdateOperationsInput, {
+  @Field(_type => String, {
     nullable: true
   })
-  firstName?: NullableStringFieldUpdateOperationsInput | undefined;
+  firstName?: string | undefined;
 
-  @Field(_type => NullableStringFieldUpdateOperationsInput, {
+  @Field(_type => String, {
     nullable: true
   })
-  lastName?: NullableStringFieldUpdateOperationsInput | undefined;
+  lastName?: string | undefined;
 
-  @Field(_type => DateTimeFieldUpdateOperationsInput, {
+  @Field(_type => Date, {
     nullable: true
   })
-  lastLogin?: DateTimeFieldUpdateOperationsInput | undefined;
+  lastLogin?: Date | undefined;
 
-  @Field(_type => BoolFieldUpdateOperationsInput, {
+  @Field(_type => Boolean, {
     nullable: true
   })
-  isSuperuser?: BoolFieldUpdateOperationsInput | undefined;
+  isSuperuser?: boolean | undefined;
 
-  @Field(_type => BoolFieldUpdateOperationsInput, {
+  @Field(_type => Boolean, {
     nullable: true
   })
-  isStaff?: BoolFieldUpdateOperationsInput | undefined;
+  isStaff?: boolean | undefined;
 
-  @Field(_type => BoolFieldUpdateOperationsInput, {
+  @Field(_type => Boolean, {
     nullable: true
   })
-  isActive?: BoolFieldUpdateOperationsInput | undefined;
+  isActive?: boolean | undefined;
 
-  @Field(_type => DateTimeFieldUpdateOperationsInput, {
+  @Field(_type => Date, {
     nullable: true
   })
-  dateJoined?: DateTimeFieldUpdateOperationsInput | undefined;
+  dateJoined?: Date | undefined;
 
-  @Field(_type => NullableDateTimeFieldUpdateOperationsInput, {
+  @Field(_type => Date, {
     nullable: true
   })
-  dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | undefined;
+  dateOfBirth?: Date | undefined;
 }

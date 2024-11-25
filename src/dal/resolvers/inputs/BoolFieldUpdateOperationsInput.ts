@@ -7,8 +7,4 @@ import { DecimalJSScalar } from "../../scalars";
   isAbstract: true
 })
 export class BoolFieldUpdateOperationsInput {
-  @Field(_type => Boolean, {
-    nullable: true
-  })
-  set?: boolean | undefined;
 }

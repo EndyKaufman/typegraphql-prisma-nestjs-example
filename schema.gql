@@ -14,76 +14,25 @@ type Recipe {
 scalar Date
 
 type Query {
-  aggregateUser(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int): AggregateUser!
   findFirstUser(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): User
   findFirstUserOrThrow(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): User
   users(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): [User!]!
-  user(where: UserWhereUniqueInput!): User
-  getUser(where: UserWhereUniqueInput!): User
-  groupByUser(where: UserWhereInput, orderBy: [UserOrderByWithAggregationInput!], by: [UserScalarFieldEnum!]!, having: UserScalarWhereWithAggregatesInput, take: Int, skip: Int): [UserGroupBy!]!
   recipe(id: String!): Recipe!
   recipes(skip: Int! = 0, take: Int! = 25): [Recipe!]!
 }
 
-type AggregateUser {
-  _count: UserCountAggregate
-  _avg: UserAvgAggregate
-  _sum: UserSumAggregate
-  _min: UserMinAggregate
-  _max: UserMaxAggregate
-}
-
-type UserCountAggregate {
+type User {
   id: Int!
-  email: Int!
-  username: Int!
-  password: Int!
-  firstName: Int!
-  lastName: Int!
-  lastLogin: Int!
-  isSuperuser: Int!
-  isStaff: Int!
-  isActive: Int!
-  dateJoined: Int!
-  dateOfBirth: Int!
-  _all: Int!
-}
-
-type UserAvgAggregate {
-  id: Float
-}
-
-type UserSumAggregate {
-  id: Int
-}
-
-type UserMinAggregate {
-  id: Int
-  email: String
+  email: String!
   username: String
-  password: String
+  password: String!
   firstName: String
   lastName: String
-  lastLogin: Date
-  isSuperuser: Boolean
-  isStaff: Boolean
-  isActive: Boolean
-  dateJoined: Date
-  dateOfBirth: Date
-}
-
-type UserMaxAggregate {
-  id: Int
-  email: String
-  username: String
-  password: String
-  firstName: String
-  lastName: String
-  lastLogin: Date
-  isSuperuser: Boolean
-  isStaff: Boolean
-  isActive: Boolean
-  dateJoined: Date
+  lastLogin: Date!
+  isSuperuser: Boolean!
+  isStaff: Boolean!
+  isActive: Boolean!
+  dateJoined: Date!
   dateOfBirth: Date
 }
 
@@ -285,21 +234,6 @@ input UserWhereUniqueInput {
   dateOfBirth: DateTimeNullableFilter
 }
 
-type User {
-  id: Int!
-  email: String!
-  username: String
-  password: String!
-  firstName: String
-  lastName: String
-  lastLogin: Date!
-  isSuperuser: Boolean!
-  isStaff: Boolean!
-  isActive: Boolean!
-  dateJoined: Date!
-  dateOfBirth: Date
-}
-
 enum UserScalarFieldEnum {
   id
   email
@@ -315,356 +249,13 @@ enum UserScalarFieldEnum {
   dateOfBirth
 }
 
-type UserGroupBy {
-  id: Int!
-  email: String!
-  username: String
-  password: String!
-  firstName: String
-  lastName: String
-  lastLogin: Date!
-  isSuperuser: Boolean!
-  isStaff: Boolean!
-  isActive: Boolean!
-  dateJoined: Date!
-  dateOfBirth: Date
-  _count: UserCountAggregate
-  _avg: UserAvgAggregate
-  _sum: UserSumAggregate
-  _min: UserMinAggregate
-  _max: UserMaxAggregate
-}
-
-input UserOrderByWithAggregationInput {
-  id: SortOrder
-  email: SortOrder
-  username: SortOrderInput
-  password: SortOrder
-  firstName: SortOrderInput
-  lastName: SortOrderInput
-  lastLogin: SortOrder
-  isSuperuser: SortOrder
-  isStaff: SortOrder
-  isActive: SortOrder
-  dateJoined: SortOrder
-  dateOfBirth: SortOrderInput
-  _count: UserCountOrderByAggregateInput
-  _avg: UserAvgOrderByAggregateInput
-  _max: UserMaxOrderByAggregateInput
-  _min: UserMinOrderByAggregateInput
-  _sum: UserSumOrderByAggregateInput
-}
-
-input UserCountOrderByAggregateInput {
-  id: SortOrder
-  email: SortOrder
-  username: SortOrder
-  password: SortOrder
-  firstName: SortOrder
-  lastName: SortOrder
-  lastLogin: SortOrder
-  isSuperuser: SortOrder
-  isStaff: SortOrder
-  isActive: SortOrder
-  dateJoined: SortOrder
-  dateOfBirth: SortOrder
-}
-
-input UserAvgOrderByAggregateInput {
-  id: SortOrder
-}
-
-input UserMaxOrderByAggregateInput {
-  id: SortOrder
-  email: SortOrder
-  username: SortOrder
-  password: SortOrder
-  firstName: SortOrder
-  lastName: SortOrder
-  lastLogin: SortOrder
-  isSuperuser: SortOrder
-  isStaff: SortOrder
-  isActive: SortOrder
-  dateJoined: SortOrder
-  dateOfBirth: SortOrder
-}
-
-input UserMinOrderByAggregateInput {
-  id: SortOrder
-  email: SortOrder
-  username: SortOrder
-  password: SortOrder
-  firstName: SortOrder
-  lastName: SortOrder
-  lastLogin: SortOrder
-  isSuperuser: SortOrder
-  isStaff: SortOrder
-  isActive: SortOrder
-  dateJoined: SortOrder
-  dateOfBirth: SortOrder
-}
-
-input UserSumOrderByAggregateInput {
-  id: SortOrder
-}
-
-input UserScalarWhereWithAggregatesInput {
-  AND: [UserScalarWhereWithAggregatesInput!]
-  OR: [UserScalarWhereWithAggregatesInput!]
-  NOT: [UserScalarWhereWithAggregatesInput!]
-  id: IntWithAggregatesFilter
-  email: StringWithAggregatesFilter
-  username: StringNullableWithAggregatesFilter
-  password: StringWithAggregatesFilter
-  firstName: StringNullableWithAggregatesFilter
-  lastName: StringNullableWithAggregatesFilter
-  lastLogin: DateTimeWithAggregatesFilter
-  isSuperuser: BoolWithAggregatesFilter
-  isStaff: BoolWithAggregatesFilter
-  isActive: BoolWithAggregatesFilter
-  dateJoined: DateTimeWithAggregatesFilter
-  dateOfBirth: DateTimeNullableWithAggregatesFilter
-}
-
-input IntWithAggregatesFilter {
-  equals: Int
-  in: [Int!]
-  notIn: [Int!]
-  lt: Int
-  lte: Int
-  gt: Int
-  gte: Int
-  not: NestedIntWithAggregatesFilter
-  _count: NestedIntFilter
-  _avg: NestedFloatFilter
-  _sum: NestedIntFilter
-  _min: NestedIntFilter
-  _max: NestedIntFilter
-}
-
-input NestedIntWithAggregatesFilter {
-  equals: Int
-  in: [Int!]
-  notIn: [Int!]
-  lt: Int
-  lte: Int
-  gt: Int
-  gte: Int
-  not: NestedIntWithAggregatesFilter
-  _count: NestedIntFilter
-  _avg: NestedFloatFilter
-  _sum: NestedIntFilter
-  _min: NestedIntFilter
-  _max: NestedIntFilter
-}
-
-input NestedFloatFilter {
-  equals: Float
-  in: [Float!]
-  notIn: [Float!]
-  lt: Float
-  lte: Float
-  gt: Float
-  gte: Float
-  not: NestedFloatFilter
-}
-
-input StringWithAggregatesFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  not: NestedStringWithAggregatesFilter
-  _count: NestedIntFilter
-  _min: NestedStringFilter
-  _max: NestedStringFilter
-}
-
-input NestedStringWithAggregatesFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  not: NestedStringWithAggregatesFilter
-  _count: NestedIntFilter
-  _min: NestedStringFilter
-  _max: NestedStringFilter
-}
-
-input StringNullableWithAggregatesFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  not: NestedStringNullableWithAggregatesFilter
-  _count: NestedIntNullableFilter
-  _min: NestedStringNullableFilter
-  _max: NestedStringNullableFilter
-}
-
-input NestedStringNullableWithAggregatesFilter {
-  equals: String
-  in: [String!]
-  notIn: [String!]
-  lt: String
-  lte: String
-  gt: String
-  gte: String
-  contains: String
-  startsWith: String
-  endsWith: String
-  not: NestedStringNullableWithAggregatesFilter
-  _count: NestedIntNullableFilter
-  _min: NestedStringNullableFilter
-  _max: NestedStringNullableFilter
-}
-
-input NestedIntNullableFilter {
-  equals: Int
-  in: [Int!]
-  notIn: [Int!]
-  lt: Int
-  lte: Int
-  gt: Int
-  gte: Int
-  not: NestedIntNullableFilter
-}
-
-input DateTimeWithAggregatesFilter {
-  equals: Date
-  in: [Date!]
-  notIn: [Date!]
-  lt: Date
-  lte: Date
-  gt: Date
-  gte: Date
-  not: NestedDateTimeWithAggregatesFilter
-  _count: NestedIntFilter
-  _min: NestedDateTimeFilter
-  _max: NestedDateTimeFilter
-}
-
-input NestedDateTimeWithAggregatesFilter {
-  equals: Date
-  in: [Date!]
-  notIn: [Date!]
-  lt: Date
-  lte: Date
-  gt: Date
-  gte: Date
-  not: NestedDateTimeWithAggregatesFilter
-  _count: NestedIntFilter
-  _min: NestedDateTimeFilter
-  _max: NestedDateTimeFilter
-}
-
-input BoolWithAggregatesFilter {
-  equals: Boolean
-  not: NestedBoolWithAggregatesFilter
-  _count: NestedIntFilter
-  _min: NestedBoolFilter
-  _max: NestedBoolFilter
-}
-
-input NestedBoolWithAggregatesFilter {
-  equals: Boolean
-  not: NestedBoolWithAggregatesFilter
-  _count: NestedIntFilter
-  _min: NestedBoolFilter
-  _max: NestedBoolFilter
-}
-
-input DateTimeNullableWithAggregatesFilter {
-  equals: Date
-  in: [Date!]
-  notIn: [Date!]
-  lt: Date
-  lte: Date
-  gt: Date
-  gte: Date
-  not: NestedDateTimeNullableWithAggregatesFilter
-  _count: NestedIntNullableFilter
-  _min: NestedDateTimeNullableFilter
-  _max: NestedDateTimeNullableFilter
-}
-
-input NestedDateTimeNullableWithAggregatesFilter {
-  equals: Date
-  in: [Date!]
-  notIn: [Date!]
-  lt: Date
-  lte: Date
-  gt: Date
-  gte: Date
-  not: NestedDateTimeNullableWithAggregatesFilter
-  _count: NestedIntNullableFilter
-  _min: NestedDateTimeNullableFilter
-  _max: NestedDateTimeNullableFilter
-}
-
 type Mutation {
-  createManyUser(data: [UserCreateManyInput!]!): AffectedRowsOutput!
-  createManyAndReturnUser(data: [UserCreateManyInput!]!): [CreateManyAndReturnUser!]!
   createOneUser(data: UserCreateInput!): User!
-  deleteManyUser(where: UserWhereInput): AffectedRowsOutput!
   deleteOneUser(where: UserWhereUniqueInput!): User
-  updateManyUser(data: UserUpdateManyMutationInput!, where: UserWhereInput): AffectedRowsOutput!
   updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   upsertOneUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   addRecipe(newRecipeData: NewRecipeInput!): Recipe!
   removeRecipe(id: String!): Boolean!
-}
-
-type AffectedRowsOutput {
-  count: Int!
-}
-
-input UserCreateManyInput {
-  id: Int
-  email: String!
-  username: String
-  password: String!
-  firstName: String
-  lastName: String
-  lastLogin: Date
-  isSuperuser: Boolean
-  isStaff: Boolean
-  isActive: Boolean
-  dateJoined: Date
-  dateOfBirth: Date
-}
-
-type CreateManyAndReturnUser {
-  id: Int!
-  email: String!
-  username: String
-  password: String!
-  firstName: String
-  lastName: String
-  lastLogin: Date!
-  isSuperuser: Boolean!
-  isStaff: Boolean!
-  isActive: Boolean!
-  dateJoined: Date!
-  dateOfBirth: Date
 }
 
 input UserCreateInput {
@@ -681,52 +272,18 @@ input UserCreateInput {
   dateOfBirth: Date
 }
 
-input UserUpdateManyMutationInput {
-  email: StringFieldUpdateOperationsInput
-  username: NullableStringFieldUpdateOperationsInput
-  password: StringFieldUpdateOperationsInput
-  firstName: NullableStringFieldUpdateOperationsInput
-  lastName: NullableStringFieldUpdateOperationsInput
-  lastLogin: DateTimeFieldUpdateOperationsInput
-  isSuperuser: BoolFieldUpdateOperationsInput
-  isStaff: BoolFieldUpdateOperationsInput
-  isActive: BoolFieldUpdateOperationsInput
-  dateJoined: DateTimeFieldUpdateOperationsInput
-  dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
-}
-
-input StringFieldUpdateOperationsInput {
-  set: String
-}
-
-input NullableStringFieldUpdateOperationsInput {
-  set: String
-}
-
-input DateTimeFieldUpdateOperationsInput {
-  set: Date
-}
-
-input BoolFieldUpdateOperationsInput {
-  set: Boolean
-}
-
-input NullableDateTimeFieldUpdateOperationsInput {
-  set: Date
-}
-
 input UserUpdateInput {
-  email: StringFieldUpdateOperationsInput
-  username: NullableStringFieldUpdateOperationsInput
-  password: StringFieldUpdateOperationsInput
-  firstName: NullableStringFieldUpdateOperationsInput
-  lastName: NullableStringFieldUpdateOperationsInput
-  lastLogin: DateTimeFieldUpdateOperationsInput
-  isSuperuser: BoolFieldUpdateOperationsInput
-  isStaff: BoolFieldUpdateOperationsInput
-  isActive: BoolFieldUpdateOperationsInput
-  dateJoined: DateTimeFieldUpdateOperationsInput
-  dateOfBirth: NullableDateTimeFieldUpdateOperationsInput
+  email: String
+  username: String
+  password: String
+  firstName: String
+  lastName: String
+  lastLogin: Date
+  isSuperuser: Boolean
+  isStaff: Boolean
+  isActive: Boolean
+  dateJoined: Date
+  dateOfBirth: Date
 }
 
 input NewRecipeInput {

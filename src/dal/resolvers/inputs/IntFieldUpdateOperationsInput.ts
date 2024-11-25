@@ -10,11 +10,6 @@ export class IntFieldUpdateOperationsInput {
   @Field(_type => Int, {
     nullable: true
   })
-  set?: number | undefined;
-
-  @Field(_type => Int, {
-    nullable: true
-  })
   increment?: number | undefined;
 
   @Field(_type => Int, {

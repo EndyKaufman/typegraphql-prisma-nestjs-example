@@ -14,25 +14,17 @@ const crudResolversMap = {
 };
 const actionResolversMap = {
   User: {
-    aggregateUser: actionResolvers.AggregateUserResolver,
-    createManyUser: actionResolvers.CreateManyUserResolver,
-    createManyAndReturnUser: actionResolvers.CreateManyAndReturnUserResolver,
     createOneUser: actionResolvers.CreateOneUserResolver,
-    deleteManyUser: actionResolvers.DeleteManyUserResolver,
     deleteOneUser: actionResolvers.DeleteOneUserResolver,
     findFirstUser: actionResolvers.FindFirstUserResolver,
     findFirstUserOrThrow: actionResolvers.FindFirstUserOrThrowResolver,
     users: actionResolvers.FindManyUserResolver,
-    user: actionResolvers.FindUniqueUserResolver,
-    getUser: actionResolvers.FindUniqueUserOrThrowResolver,
-    groupByUser: actionResolvers.GroupByUserResolver,
-    updateManyUser: actionResolvers.UpdateManyUserResolver,
     updateOneUser: actionResolvers.UpdateOneUserResolver,
     upsertOneUser: actionResolvers.UpsertOneUserResolver
   }
 };
 const crudResolversInfo = {
-  User: ["aggregateUser", "createManyUser", "createManyAndReturnUser", "createOneUser", "deleteManyUser", "deleteOneUser", "findFirstUser", "findFirstUserOrThrow", "users", "user", "getUser", "groupByUser", "updateManyUser", "updateOneUser", "upsertOneUser"]
+  User: ["createOneUser", "deleteOneUser", "findFirstUser", "findFirstUserOrThrow", "users", "updateOneUser", "upsertOneUser"]
 };
 const argsInfo = {
   AggregateUserArgs: ["where", "orderBy", "cursor", "take", "skip"],

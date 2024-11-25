@@ -26,7 +26,7 @@
     "prisma:silent-watch": "npm run prisma -- generate -- --watch &"
   },
   "dependencies": {
-    "@nestjs/apollo":"12.2.0",
+    "@nestjs/apollo": "12.2.0",
     "@nestjs/common": "10.3.10",
     "@nestjs/core": "10.3.10",
     "@nestjs/graphql": "12.2.0",
@@ -69,7 +69,7 @@
     "ts-loader": "9.2.2",
     "ts-node": "10.0.0",
     "tsconfig-paths": "3.9.0",
-    "typegraphql-prisma-nestjs": "0.2800.0",
+    "typegraphql-prisma-nestjs": "0.2800.3",
     "typescript": "~5.5.4"
   }
 }

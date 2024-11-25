@@ -7,8 +7,4 @@ import { DecimalJSScalar } from "../../scalars";
   isAbstract: true
 })
 export class NullableStringFieldUpdateOperationsInput {
-  @Field(_type => String, {
-    nullable: true
-  })
-  set?: string | undefined;
 }

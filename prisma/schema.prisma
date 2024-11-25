@@ -11,13 +11,18 @@ generator client {
 }
 
 generator typegraphql {
-  provider = "typegraphql-prisma-nestjs"
-  output   = "../src/dal"
+  provider       = "typegraphql-prisma-nestjs"
+  output         = "../src/dal"
   emitIsAbstract = true
+
+  useSimpleInputs     = "true"
+  emitOnly            = "enums,models,crudResolvers,inputs,outputs,relationResolvers"
+  emitActions         = "findUnique, findUniqueOrThrow, createMany, createManyAndReturn, updateMany, deleteMany, upsertOne, aggregate, groupBy"
+  emitPropertyMethods = "connectOrCreate, upsert, set, disconnect, connect, updateMany, deleteMany"
 }
 
 model User {
-  id          Int       @default(autoincrement()) @id
+  id          Int       @id @default(autoincrement())
   email       String    @unique
   username    String?
   password    String
@@ -29,5 +34,6 @@ model User {
   isActive    Boolean   @default(false) @map("is_active")
   dateJoined  DateTime  @default(now()) @map("date_joined")
   dateOfBirth DateTime? @map("date_of_birth")
+
   @@map("auth_users")
 }
