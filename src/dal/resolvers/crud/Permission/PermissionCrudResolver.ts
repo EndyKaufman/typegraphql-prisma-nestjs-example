@@ -1,4 +1,4 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
+import { Args, ArgsType, Context, Field, Float, GqlExecutionContext, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import type { GraphQLResolveInfo } from "graphql";
 import { CreateOnePermissionArgs } from "./args/CreateOnePermissionArgs";
 import { DeleteOnePermissionArgs } from "./args/DeleteOnePermissionArgs";
@@ -7,7 +7,7 @@ import { FindFirstPermissionOrThrowArgs } from "./args/FindFirstPermissionOrThro
 import { FindManyPermissionArgs } from "./args/FindManyPermissionArgs";
 import { UpdateOnePermissionArgs } from "./args/UpdateOnePermissionArgs";
 import { UpsertOnePermissionArgs } from "./args/UpsertOnePermissionArgs";
-import { transformArgsIntoPrismaArgs, transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { transformArgsIntoPrismaArgs, transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, InlineLoader } from "../../../helpers";
 import { Permission } from "../../../models/Permission";
 
 @Resolver(_of => Permission)

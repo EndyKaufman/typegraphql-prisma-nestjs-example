@@ -1,4 +1,4 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
+import { Args, ArgsType, Context, Field, Float, GqlExecutionContext, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import type { GraphQLResolveInfo } from "graphql";
 import { CreateOneRoleArgs } from "./args/CreateOneRoleArgs";
 import { DeleteOneRoleArgs } from "./args/DeleteOneRoleArgs";
@@ -7,7 +7,7 @@ import { FindFirstRoleOrThrowArgs } from "./args/FindFirstRoleOrThrowArgs";
 import { FindManyRoleArgs } from "./args/FindManyRoleArgs";
 import { UpdateOneRoleArgs } from "./args/UpdateOneRoleArgs";
 import { UpsertOneRoleArgs } from "./args/UpsertOneRoleArgs";
-import { transformArgsIntoPrismaArgs, transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { transformArgsIntoPrismaArgs, transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, InlineLoader } from "../../../helpers";
 import { Role } from "../../../models/Role";
 
 @Resolver(_of => Role)

@@ -15,10 +15,11 @@ generator typegraphql {
   output         = "../src/dal"
   emitIsAbstract = true
 
-  useSimpleInputs     = "true"
-  emitOnly            = "enums,models,crudResolvers,inputs,outputs,relationResolvers"
-  emitActions         = "findUnique, findUniqueOrThrow, createMany, createManyAndReturn, updateMany, deleteMany, upsertOne, aggregate, groupBy"
-  emitPropertyMethods = "connectOrCreate, upsert, set, disconnect, updateMany, deleteMany"
+  useSimpleInputs                  = "true"
+  emitOnly                         = "enums,models,crudResolvers,inputs,outputs,relationResolvers"
+  emitActions                      = "findUnique, findUniqueOrThrow, createMany, createManyAndReturn, updateMany, deleteMany, upsertOne, aggregate, groupBy"
+  emitPropertyMethods              = "connectOrCreate, upsert, set, disconnect, updateMany, deleteMany"
+  useDataloaderForAllResolveFields = "true"
 }
 
 model User {

@@ -1,4 +1,4 @@
-import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
+import { Args, ArgsType, Context, Field, Float, GqlExecutionContext, ID, Info, InputType, Int, Mutation, ObjectType, Query, ResolveField, Resolver, Root, registerEnumType } from "@nestjs/graphql";
 import type { GraphQLResolveInfo } from "graphql";
 import { CreateOneUserArgs } from "./args/CreateOneUserArgs";
 import { DeleteOneUserArgs } from "./args/DeleteOneUserArgs";
@@ -7,7 +7,7 @@ import { FindFirstUserOrThrowArgs } from "./args/FindFirstUserOrThrowArgs";
 import { FindManyUserArgs } from "./args/FindManyUserArgs";
 import { UpdateOneUserArgs } from "./args/UpdateOneUserArgs";
 import { UpsertOneUserArgs } from "./args/UpsertOneUserArgs";
-import { transformArgsIntoPrismaArgs, transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount } from "../../../helpers";
+import { transformArgsIntoPrismaArgs, transformInfoIntoPrismaArgs, getPrismaFromContext, transformCountFieldIntoSelectRelationsCount, InlineLoader } from "../../../helpers";
 import { User } from "../../../models/User";
 
 @Resolver(_of => User)
