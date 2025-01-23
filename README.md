@@ -29,6 +29,7 @@ https://github.com/EndyKaufman/typegraphql-prisma-nestjs-example/tree/master/src
 ### Mutation by Prisma2 + TypeGraphQL generator = Generated Crud
 
 **Create role**
+
 Query
 
 ```graphql
@@ -54,6 +55,7 @@ Result
 ```
 
 **Create user**
+
 Query
 
 ```graphql
