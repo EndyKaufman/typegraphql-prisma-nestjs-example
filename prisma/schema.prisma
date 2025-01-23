@@ -18,7 +18,7 @@ generator typegraphql {
   useSimpleInputs     = "true"
   emitOnly            = "enums,models,crudResolvers,inputs,outputs,relationResolvers"
   emitActions         = "findUnique, findUniqueOrThrow, createMany, createManyAndReturn, updateMany, deleteMany, upsertOne, aggregate, groupBy"
-  emitPropertyMethods = "connectOrCreate, upsert, set, disconnect, connect, updateMany, deleteMany"
+  emitPropertyMethods = "connectOrCreate, upsert, set, disconnect, updateMany, deleteMany"
 }
 
 model User {
@@ -34,6 +34,39 @@ model User {
   isActive    Boolean   @default(false) @map("is_active")
   dateJoined  DateTime  @default(now()) @map("date_joined")
   dateOfBirth DateTime? @map("date_of_birth")
+  roleId      Int
+  Role        Role      @relation(fields: [roleId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
+  @@index([roleId], map: "idx_auth_users__role_id")
   @@map("auth_users")
+}
+
+model Role {
+  id              Int               @id @default(autoincrement())
+  name            String            @unique
+  User            User[]
+  RolePermissions RolePermissions[]
+
+  @@map("auth_roles")
+}
+
+model Permission {
+  id              Int               @id @default(autoincrement())
+  name            String            @unique
+  RolePermissions RolePermissions[]
+
+  @@map("auth_permissions")
+}
+
+model RolePermissions {
+  id           Int        @id @default(autoincrement())
+  roleId       Int
+  permissionId Int
+  Role         Role       @relation(fields: [roleId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Permission   Permission @relation(fields: [permissionId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([roleId, permissionId], map: "uq_auth_role_permissions")
+  @@index([roleId], map: "idx_auth_role_permissions__role_id")
+  @@index([permissionId], map: "idx_auth_role_permissions__role_permission_id")
+  @@map("auth_role_permissions")
 }

@@ -11,4 +11,9 @@ export class UserSumAggregate {
     nullable: true
   })
   id!: number | null;
+
+  @Field(_type => Int, {
+    nullable: true
+  })
+  roleId!: number | null;
 }

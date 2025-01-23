@@ -2,6 +2,7 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../scalars";
+import { Role } from "../models/Role";
 
 @ObjectType("User", {
   isAbstract: true
@@ -66,4 +67,11 @@ export class User {
     nullable: true
   })
   dateOfBirth?: Date | null;
+
+  @Field(_type => Int, {
+    nullable: false
+  })
+  roleId!: number;
+
+  Role?: Role;
 }

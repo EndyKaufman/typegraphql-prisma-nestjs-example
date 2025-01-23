@@ -2,6 +2,7 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { RoleUpdateOneRequiredWithoutUserNestedInput } from "../inputs/RoleUpdateOneRequiredWithoutUserNestedInput";
 
 @InputType("UserUpdateInput", {
   isAbstract: true
@@ -61,4 +62,9 @@ export class UserUpdateInput {
     nullable: true
   })
   dateOfBirth?: Date | undefined;
+
+  @Field(_type => RoleUpdateOneRequiredWithoutUserNestedInput, {
+    nullable: true
+  })
+  Role?: RoleUpdateOneRequiredWithoutUserNestedInput | undefined;
 }

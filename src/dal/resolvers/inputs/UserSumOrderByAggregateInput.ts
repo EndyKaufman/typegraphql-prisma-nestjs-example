@@ -12,4 +12,9 @@ export class UserSumOrderByAggregateInput {
     nullable: true
   })
   id?: "asc" | "desc" | undefined;
+
+  @Field(_type => SortOrder, {
+    nullable: true
+  })
+  roleId?: "asc" | "desc" | undefined;
 }

@@ -70,5 +70,10 @@ export class UserCountAggregate {
   @Field(_type => Int, {
     nullable: false
   })
+  roleId!: number;
+
+  @Field(_type => Int, {
+    nullable: false
+  })
   _all!: number;
 }

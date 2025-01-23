@@ -2,6 +2,7 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { Role } from "../../models/Role";
 
 @ObjectType("CreateManyAndReturnUser", {
   isAbstract: true
@@ -66,4 +67,14 @@ export class CreateManyAndReturnUser {
     nullable: true
   })
   dateOfBirth!: Date | null;
+
+  @Field(_type => Int, {
+    nullable: false
+  })
+  roleId!: number;
+
+  @Field(_type => Role, {
+    nullable: false
+  })
+  Role!: Role;
 }

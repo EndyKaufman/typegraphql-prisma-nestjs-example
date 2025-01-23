@@ -28,14 +28,14 @@ https://github.com/EndyKaufman/typegraphql-prisma-nestjs-example/tree/master/src
 
 ### Mutation by Prisma2 + TypeGraphQL generator = Generated Crud
 
+**Create role**
 Query
 
 ```graphql
 mutation {
-    createOneUser(data: { username: "user", email: "user@user.com", password: "secret" }) {
-        email
-        username
-        password
+    createOneRole(data: { name: "User" }) {
+        id
+        name
     }
 }
 ```
@@ -45,10 +45,38 @@ Result
 ```js
 {
   "data": {
-    "createUser": {
+    "createOneRole": {
+      "id": 1,
+      "name": "User"
+    }
+  }
+}
+```
+
+**Create user**
+Query
+
+```graphql
+mutation {
+    createOneUser(data: { username: "user", email: "user@user.com", password: "secret", Role: { connect: { id: 1 } } }) {
+        email
+        username
+        password
+        roleId
+    }
+}
+```
+
+Result
+
+```js
+{
+  "data": {
+    "createOneUser": {
       "email": "user@user.com",
       "username": "user",
-      "password": "secret"
+      "password": "secret",
+      "roleId": 1
     }
   }
 }

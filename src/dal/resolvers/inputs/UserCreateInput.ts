@@ -2,6 +2,7 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { RoleCreateNestedOneWithoutUserInput } from "../inputs/RoleCreateNestedOneWithoutUserInput";
 
 @InputType("UserCreateInput", {
   isAbstract: true
@@ -61,4 +62,9 @@ export class UserCreateInput {
     nullable: true
   })
   dateOfBirth?: Date | undefined;
+
+  @Field(_type => RoleCreateNestedOneWithoutUserInput, {
+    nullable: false
+  })
+  Role!: RoleCreateNestedOneWithoutUserInput;
 }

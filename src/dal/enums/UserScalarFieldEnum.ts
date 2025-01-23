@@ -12,7 +12,8 @@ export enum UserScalarFieldEnum {
   isStaff = "isStaff",
   isActive = "isActive",
   dateJoined = "dateJoined",
-  dateOfBirth = "dateOfBirth"
+  dateOfBirth = "dateOfBirth",
+  roleId = "roleId"
 }
 registerEnumType(UserScalarFieldEnum, {
   name: "UserScalarFieldEnum",

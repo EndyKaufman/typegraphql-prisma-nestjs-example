@@ -72,6 +72,11 @@ export class UserGroupBy {
   })
   dateOfBirth!: Date | null;
 
+  @Field(_type => Int, {
+    nullable: false
+  })
+  roleId!: number;
+
   @Field(_type => UserCountAggregate, {
     nullable: true
   })

@@ -67,4 +67,9 @@ export class UserMinOrderByAggregateInput {
     nullable: true
   })
   dateOfBirth?: "asc" | "desc" | undefined;
+
+  @Field(_type => SortOrder, {
+    nullable: true
+  })
+  roleId?: "asc" | "desc" | undefined;
 }

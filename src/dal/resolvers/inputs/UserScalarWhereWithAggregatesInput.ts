@@ -87,4 +87,9 @@ export class UserScalarWhereWithAggregatesInput {
     nullable: true
   })
   dateOfBirth?: DateTimeNullableWithAggregatesFilter | undefined;
+
+  @Field(_type => IntWithAggregatesFilter, {
+    nullable: true
+  })
+  roleId?: IntWithAggregatesFilter | undefined;
 }

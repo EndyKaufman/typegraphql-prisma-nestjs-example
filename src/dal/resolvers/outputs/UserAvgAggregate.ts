@@ -11,4 +11,9 @@ export class UserAvgAggregate {
     nullable: true
   })
   id!: number | null;
+
+  @Field(_type => Float, {
+    nullable: true
+  })
+  roleId!: number | null;
 }

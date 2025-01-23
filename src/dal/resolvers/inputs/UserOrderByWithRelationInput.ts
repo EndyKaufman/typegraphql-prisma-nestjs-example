@@ -2,6 +2,7 @@ import { Args, ArgsType, Context, Field, Float, ID, Info, InputType, Int, Mutati
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
+import { RoleOrderByWithRelationInput } from "../inputs/RoleOrderByWithRelationInput";
 import { SortOrderInput } from "../inputs/SortOrderInput";
 import { SortOrder } from "../../enums/SortOrder";
 
@@ -68,4 +69,14 @@ export class UserOrderByWithRelationInput {
     nullable: true
   })
   dateOfBirth?: SortOrderInput | undefined;
+
+  @Field(_type => SortOrder, {
+    nullable: true
+  })
+  roleId?: "asc" | "desc" | undefined;
+
+  @Field(_type => RoleOrderByWithRelationInput, {
+    nullable: true
+  })
+  Role?: RoleOrderByWithRelationInput | undefined;
 }

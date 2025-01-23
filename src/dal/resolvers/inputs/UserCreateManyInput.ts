@@ -66,4 +66,9 @@ export class UserCreateManyInput {
     nullable: true
   })
   dateOfBirth?: Date | undefined;
+
+  @Field(_type => Int, {
+    nullable: false
+  })
+  roleId!: number;
 }

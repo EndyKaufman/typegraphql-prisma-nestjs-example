@@ -14,6 +14,15 @@ type Recipe {
 scalar Date
 
 type Query {
+  findFirstPermission(where: PermissionWhereInput, orderBy: [PermissionOrderByWithRelationInput!], cursor: PermissionWhereUniqueInput, take: Int, skip: Int, distinct: [PermissionScalarFieldEnum!]): Permission
+  findFirstPermissionOrThrow(where: PermissionWhereInput, orderBy: [PermissionOrderByWithRelationInput!], cursor: PermissionWhereUniqueInput, take: Int, skip: Int, distinct: [PermissionScalarFieldEnum!]): Permission
+  permissions(where: PermissionWhereInput, orderBy: [PermissionOrderByWithRelationInput!], cursor: PermissionWhereUniqueInput, take: Int, skip: Int, distinct: [PermissionScalarFieldEnum!]): [Permission!]!
+  findFirstRole(where: RoleWhereInput, orderBy: [RoleOrderByWithRelationInput!], cursor: RoleWhereUniqueInput, take: Int, skip: Int, distinct: [RoleScalarFieldEnum!]): Role
+  findFirstRoleOrThrow(where: RoleWhereInput, orderBy: [RoleOrderByWithRelationInput!], cursor: RoleWhereUniqueInput, take: Int, skip: Int, distinct: [RoleScalarFieldEnum!]): Role
+  roles(where: RoleWhereInput, orderBy: [RoleOrderByWithRelationInput!], cursor: RoleWhereUniqueInput, take: Int, skip: Int, distinct: [RoleScalarFieldEnum!]): [Role!]!
+  findFirstRolePermissions(where: RolePermissionsWhereInput, orderBy: [RolePermissionsOrderByWithRelationInput!], cursor: RolePermissionsWhereUniqueInput, take: Int, skip: Int, distinct: [RolePermissionsScalarFieldEnum!]): RolePermissions
+  findFirstRolePermissionsOrThrow(where: RolePermissionsWhereInput, orderBy: [RolePermissionsOrderByWithRelationInput!], cursor: RolePermissionsWhereUniqueInput, take: Int, skip: Int, distinct: [RolePermissionsScalarFieldEnum!]): RolePermissions
+  findManyRolePermissions(where: RolePermissionsWhereInput, orderBy: [RolePermissionsOrderByWithRelationInput!], cursor: RolePermissionsWhereUniqueInput, take: Int, skip: Int, distinct: [RolePermissionsScalarFieldEnum!]): [RolePermissions!]!
   findFirstUser(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): User
   findFirstUserOrThrow(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): User
   users(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): [User!]!
@@ -21,37 +30,23 @@ type Query {
   recipes(skip: Int! = 0, take: Int! = 25): [Recipe!]!
 }
 
-type User {
+type Permission {
   id: Int!
-  email: String!
-  username: String
-  password: String!
-  firstName: String
-  lastName: String
-  lastLogin: Date!
-  isSuperuser: Boolean!
-  isStaff: Boolean!
-  isActive: Boolean!
-  dateJoined: Date!
-  dateOfBirth: Date
+  name: String!
+  _count: PermissionCount
 }
 
-input UserWhereInput {
-  AND: [UserWhereInput!]
-  OR: [UserWhereInput!]
-  NOT: [UserWhereInput!]
+type PermissionCount {
+  RolePermissions: Int!
+}
+
+input PermissionWhereInput {
+  AND: [PermissionWhereInput!]
+  OR: [PermissionWhereInput!]
+  NOT: [PermissionWhereInput!]
   id: IntFilter
-  email: StringFilter
-  username: StringNullableFilter
-  password: StringFilter
-  firstName: StringNullableFilter
-  lastName: StringNullableFilter
-  lastLogin: DateTimeFilter
-  isSuperuser: BoolFilter
-  isStaff: BoolFilter
-  isActive: BoolFilter
-  dateJoined: DateTimeFilter
-  dateOfBirth: DateTimeNullableFilter
+  name: StringFilter
+  RolePermissions: RolePermissionsListRelationFilter
 }
 
 input IntFilter {
@@ -102,6 +97,64 @@ input NestedStringFilter {
   startsWith: String
   endsWith: String
   not: NestedStringFilter
+}
+
+input RolePermissionsListRelationFilter {
+  every: RolePermissionsWhereInput
+  some: RolePermissionsWhereInput
+  none: RolePermissionsWhereInput
+}
+
+input RolePermissionsWhereInput {
+  AND: [RolePermissionsWhereInput!]
+  OR: [RolePermissionsWhereInput!]
+  NOT: [RolePermissionsWhereInput!]
+  id: IntFilter
+  roleId: IntFilter
+  permissionId: IntFilter
+  Role: RoleRelationFilter
+  Permission: PermissionRelationFilter
+}
+
+input RoleRelationFilter {
+  is: RoleWhereInput
+  isNot: RoleWhereInput
+}
+
+input RoleWhereInput {
+  AND: [RoleWhereInput!]
+  OR: [RoleWhereInput!]
+  NOT: [RoleWhereInput!]
+  id: IntFilter
+  name: StringFilter
+  User: UserListRelationFilter
+  RolePermissions: RolePermissionsListRelationFilter
+}
+
+input UserListRelationFilter {
+  every: UserWhereInput
+  some: UserWhereInput
+  none: UserWhereInput
+}
+
+input UserWhereInput {
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+  id: IntFilter
+  email: StringFilter
+  username: StringNullableFilter
+  password: StringFilter
+  firstName: StringNullableFilter
+  lastName: StringNullableFilter
+  lastLogin: DateTimeFilter
+  isSuperuser: BoolFilter
+  isStaff: BoolFilter
+  isActive: BoolFilter
+  dateJoined: DateTimeFilter
+  dateOfBirth: DateTimeNullableFilter
+  roleId: IntFilter
+  Role: RoleRelationFilter
 }
 
 input StringNullableFilter {
@@ -186,6 +239,130 @@ input NestedDateTimeNullableFilter {
   not: NestedDateTimeNullableFilter
 }
 
+input PermissionRelationFilter {
+  is: PermissionWhereInput
+  isNot: PermissionWhereInput
+}
+
+input PermissionOrderByWithRelationInput {
+  id: SortOrder
+  name: SortOrder
+  RolePermissions: RolePermissionsOrderByRelationAggregateInput
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input RolePermissionsOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input PermissionWhereUniqueInput {
+  id: Int
+  name: String
+  AND: [PermissionWhereInput!]
+  OR: [PermissionWhereInput!]
+  NOT: [PermissionWhereInput!]
+  RolePermissions: RolePermissionsListRelationFilter
+}
+
+enum PermissionScalarFieldEnum {
+  id
+  name
+}
+
+type Role {
+  id: Int!
+  name: String!
+  _count: RoleCount
+}
+
+type RoleCount {
+  User: Int!
+  RolePermissions: Int!
+}
+
+input RoleOrderByWithRelationInput {
+  id: SortOrder
+  name: SortOrder
+  User: UserOrderByRelationAggregateInput
+  RolePermissions: RolePermissionsOrderByRelationAggregateInput
+}
+
+input UserOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input RoleWhereUniqueInput {
+  id: Int
+  name: String
+  AND: [RoleWhereInput!]
+  OR: [RoleWhereInput!]
+  NOT: [RoleWhereInput!]
+  User: UserListRelationFilter
+  RolePermissions: RolePermissionsListRelationFilter
+}
+
+enum RoleScalarFieldEnum {
+  id
+  name
+}
+
+type RolePermissions {
+  id: Int!
+  roleId: Int!
+  permissionId: Int!
+}
+
+input RolePermissionsOrderByWithRelationInput {
+  id: SortOrder
+  roleId: SortOrder
+  permissionId: SortOrder
+  Role: RoleOrderByWithRelationInput
+  Permission: PermissionOrderByWithRelationInput
+}
+
+input RolePermissionsWhereUniqueInput {
+  id: Int
+  roleId_permissionId: RolePermissionsRoleIdPermissionIdCompoundUniqueInput
+  AND: [RolePermissionsWhereInput!]
+  OR: [RolePermissionsWhereInput!]
+  NOT: [RolePermissionsWhereInput!]
+  roleId: IntFilter
+  permissionId: IntFilter
+  Role: RoleRelationFilter
+  Permission: PermissionRelationFilter
+}
+
+input RolePermissionsRoleIdPermissionIdCompoundUniqueInput {
+  roleId: Int!
+  permissionId: Int!
+}
+
+enum RolePermissionsScalarFieldEnum {
+  id
+  roleId
+  permissionId
+}
+
+type User {
+  id: Int!
+  email: String!
+  username: String
+  password: String!
+  firstName: String
+  lastName: String
+  lastLogin: Date!
+  isSuperuser: Boolean!
+  isStaff: Boolean!
+  isActive: Boolean!
+  dateJoined: Date!
+  dateOfBirth: Date
+  roleId: Int!
+}
+
 input UserOrderByWithRelationInput {
   id: SortOrder
   email: SortOrder
@@ -199,11 +376,8 @@ input UserOrderByWithRelationInput {
   isActive: SortOrder
   dateJoined: SortOrder
   dateOfBirth: SortOrderInput
-}
-
-enum SortOrder {
-  asc
-  desc
+  roleId: SortOrder
+  Role: RoleOrderByWithRelationInput
 }
 
 input SortOrderInput {
@@ -232,6 +406,8 @@ input UserWhereUniqueInput {
   isActive: BoolFilter
   dateJoined: DateTimeFilter
   dateOfBirth: DateTimeNullableFilter
+  roleId: IntFilter
+  Role: RoleRelationFilter
 }
 
 enum UserScalarFieldEnum {
@@ -247,15 +423,248 @@ enum UserScalarFieldEnum {
   isActive
   dateJoined
   dateOfBirth
+  roleId
 }
 
 type Mutation {
+  createOnePermission(data: PermissionCreateInput!): Permission!
+  deleteOnePermission(where: PermissionWhereUniqueInput!): Permission
+  updateOnePermission(data: PermissionUpdateInput!, where: PermissionWhereUniqueInput!): Permission
+  upsertOnePermission(where: PermissionWhereUniqueInput!, create: PermissionCreateInput!, update: PermissionUpdateInput!): Permission!
+  createOneRole(data: RoleCreateInput!): Role!
+  deleteOneRole(where: RoleWhereUniqueInput!): Role
+  updateOneRole(data: RoleUpdateInput!, where: RoleWhereUniqueInput!): Role
+  upsertOneRole(where: RoleWhereUniqueInput!, create: RoleCreateInput!, update: RoleUpdateInput!): Role!
+  createOneRolePermissions(data: RolePermissionsCreateInput!): RolePermissions!
+  deleteOneRolePermissions(where: RolePermissionsWhereUniqueInput!): RolePermissions
+  updateOneRolePermissions(data: RolePermissionsUpdateInput!, where: RolePermissionsWhereUniqueInput!): RolePermissions
+  upsertOneRolePermissions(where: RolePermissionsWhereUniqueInput!, create: RolePermissionsCreateInput!, update: RolePermissionsUpdateInput!): RolePermissions!
   createOneUser(data: UserCreateInput!): User!
   deleteOneUser(where: UserWhereUniqueInput!): User
   updateOneUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   upsertOneUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   addRecipe(newRecipeData: NewRecipeInput!): Recipe!
   removeRecipe(id: String!): Boolean!
+}
+
+input PermissionCreateInput {
+  name: String!
+  RolePermissions: RolePermissionsCreateNestedManyWithoutPermissionInput
+}
+
+input RolePermissionsCreateNestedManyWithoutPermissionInput {
+  create: [RolePermissionsCreateWithoutPermissionInput!]
+  createMany: RolePermissionsCreateManyPermissionInputEnvelope
+  connect: [RolePermissionsWhereUniqueInput!]
+}
+
+input RolePermissionsCreateWithoutPermissionInput {
+  Role: RoleCreateNestedOneWithoutRolePermissionsInput!
+}
+
+input RoleCreateNestedOneWithoutRolePermissionsInput {
+  create: RoleCreateWithoutRolePermissionsInput
+  connect: RoleWhereUniqueInput
+}
+
+input RoleCreateWithoutRolePermissionsInput {
+  name: String!
+  User: UserCreateNestedManyWithoutRoleInput
+}
+
+input UserCreateNestedManyWithoutRoleInput {
+  create: [UserCreateWithoutRoleInput!]
+  createMany: UserCreateManyRoleInputEnvelope
+  connect: [UserWhereUniqueInput!]
+}
+
+input UserCreateWithoutRoleInput {
+  email: String!
+  username: String
+  password: String!
+  firstName: String
+  lastName: String
+  lastLogin: Date
+  isSuperuser: Boolean
+  isStaff: Boolean
+  isActive: Boolean
+  dateJoined: Date
+  dateOfBirth: Date
+}
+
+input UserCreateManyRoleInputEnvelope {
+  data: [UserCreateManyRoleInput!]!
+}
+
+input UserCreateManyRoleInput {
+  id: Int
+  email: String!
+  username: String
+  password: String!
+  firstName: String
+  lastName: String
+  lastLogin: Date
+  isSuperuser: Boolean
+  isStaff: Boolean
+  isActive: Boolean
+  dateJoined: Date
+  dateOfBirth: Date
+}
+
+input RolePermissionsCreateManyPermissionInputEnvelope {
+  data: [RolePermissionsCreateManyPermissionInput!]!
+}
+
+input RolePermissionsCreateManyPermissionInput {
+  id: Int
+  roleId: Int!
+}
+
+input PermissionUpdateInput {
+  name: String
+  RolePermissions: RolePermissionsUpdateManyWithoutPermissionNestedInput
+}
+
+input RolePermissionsUpdateManyWithoutPermissionNestedInput {
+  create: [RolePermissionsCreateWithoutPermissionInput!]
+  createMany: RolePermissionsCreateManyPermissionInputEnvelope
+  delete: [RolePermissionsWhereUniqueInput!]
+  connect: [RolePermissionsWhereUniqueInput!]
+  update: [RolePermissionsUpdateWithWhereUniqueWithoutPermissionInput!]
+}
+
+input RolePermissionsUpdateWithWhereUniqueWithoutPermissionInput {
+  where: RolePermissionsWhereUniqueInput!
+  data: RolePermissionsUpdateWithoutPermissionInput!
+}
+
+input RolePermissionsUpdateWithoutPermissionInput {
+  Role: RoleUpdateOneRequiredWithoutRolePermissionsNestedInput
+}
+
+input RoleUpdateOneRequiredWithoutRolePermissionsNestedInput {
+  create: RoleCreateWithoutRolePermissionsInput
+  connect: RoleWhereUniqueInput
+  update: RoleUpdateToOneWithWhereWithoutRolePermissionsInput
+}
+
+input RoleUpdateToOneWithWhereWithoutRolePermissionsInput {
+  where: RoleWhereInput
+  data: RoleUpdateWithoutRolePermissionsInput!
+}
+
+input RoleUpdateWithoutRolePermissionsInput {
+  name: String
+  User: UserUpdateManyWithoutRoleNestedInput
+}
+
+input UserUpdateManyWithoutRoleNestedInput {
+  create: [UserCreateWithoutRoleInput!]
+  createMany: UserCreateManyRoleInputEnvelope
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutRoleInput!]
+}
+
+input UserUpdateWithWhereUniqueWithoutRoleInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutRoleInput!
+}
+
+input UserUpdateWithoutRoleInput {
+  email: String
+  username: String
+  password: String
+  firstName: String
+  lastName: String
+  lastLogin: Date
+  isSuperuser: Boolean
+  isStaff: Boolean
+  isActive: Boolean
+  dateJoined: Date
+  dateOfBirth: Date
+}
+
+input RoleCreateInput {
+  name: String!
+  User: UserCreateNestedManyWithoutRoleInput
+  RolePermissions: RolePermissionsCreateNestedManyWithoutRoleInput
+}
+
+input RolePermissionsCreateNestedManyWithoutRoleInput {
+  create: [RolePermissionsCreateWithoutRoleInput!]
+  createMany: RolePermissionsCreateManyRoleInputEnvelope
+  connect: [RolePermissionsWhereUniqueInput!]
+}
+
+input RolePermissionsCreateWithoutRoleInput {
+  Permission: PermissionCreateNestedOneWithoutRolePermissionsInput!
+}
+
+input PermissionCreateNestedOneWithoutRolePermissionsInput {
+  create: PermissionCreateWithoutRolePermissionsInput
+  connect: PermissionWhereUniqueInput
+}
+
+input PermissionCreateWithoutRolePermissionsInput {
+  name: String!
+}
+
+input RolePermissionsCreateManyRoleInputEnvelope {
+  data: [RolePermissionsCreateManyRoleInput!]!
+}
+
+input RolePermissionsCreateManyRoleInput {
+  id: Int
+  permissionId: Int!
+}
+
+input RoleUpdateInput {
+  name: String
+  User: UserUpdateManyWithoutRoleNestedInput
+  RolePermissions: RolePermissionsUpdateManyWithoutRoleNestedInput
+}
+
+input RolePermissionsUpdateManyWithoutRoleNestedInput {
+  create: [RolePermissionsCreateWithoutRoleInput!]
+  createMany: RolePermissionsCreateManyRoleInputEnvelope
+  delete: [RolePermissionsWhereUniqueInput!]
+  connect: [RolePermissionsWhereUniqueInput!]
+  update: [RolePermissionsUpdateWithWhereUniqueWithoutRoleInput!]
+}
+
+input RolePermissionsUpdateWithWhereUniqueWithoutRoleInput {
+  where: RolePermissionsWhereUniqueInput!
+  data: RolePermissionsUpdateWithoutRoleInput!
+}
+
+input RolePermissionsUpdateWithoutRoleInput {
+  Permission: PermissionUpdateOneRequiredWithoutRolePermissionsNestedInput
+}
+
+input PermissionUpdateOneRequiredWithoutRolePermissionsNestedInput {
+  create: PermissionCreateWithoutRolePermissionsInput
+  connect: PermissionWhereUniqueInput
+  update: PermissionUpdateToOneWithWhereWithoutRolePermissionsInput
+}
+
+input PermissionUpdateToOneWithWhereWithoutRolePermissionsInput {
+  where: PermissionWhereInput
+  data: PermissionUpdateWithoutRolePermissionsInput!
+}
+
+input PermissionUpdateWithoutRolePermissionsInput {
+  name: String
+}
+
+input RolePermissionsCreateInput {
+  Role: RoleCreateNestedOneWithoutRolePermissionsInput!
+  Permission: PermissionCreateNestedOneWithoutRolePermissionsInput!
+}
+
+input RolePermissionsUpdateInput {
+  Role: RoleUpdateOneRequiredWithoutRolePermissionsNestedInput
+  Permission: PermissionUpdateOneRequiredWithoutRolePermissionsNestedInput
 }
 
 input UserCreateInput {
@@ -270,6 +679,17 @@ input UserCreateInput {
   isActive: Boolean
   dateJoined: Date
   dateOfBirth: Date
+  Role: RoleCreateNestedOneWithoutUserInput!
+}
+
+input RoleCreateNestedOneWithoutUserInput {
+  create: RoleCreateWithoutUserInput
+  connect: RoleWhereUniqueInput
+}
+
+input RoleCreateWithoutUserInput {
+  name: String!
+  RolePermissions: RolePermissionsCreateNestedManyWithoutRoleInput
 }
 
 input UserUpdateInput {
@@ -284,6 +704,23 @@ input UserUpdateInput {
   isActive: Boolean
   dateJoined: Date
   dateOfBirth: Date
+  Role: RoleUpdateOneRequiredWithoutUserNestedInput
+}
+
+input RoleUpdateOneRequiredWithoutUserNestedInput {
+  create: RoleCreateWithoutUserInput
+  connect: RoleWhereUniqueInput
+  update: RoleUpdateToOneWithWhereWithoutUserInput
+}
+
+input RoleUpdateToOneWithWhereWithoutUserInput {
+  where: RoleWhereInput
+  data: RoleUpdateWithoutUserInput!
+}
+
+input RoleUpdateWithoutUserInput {
+  name: String
+  RolePermissions: RolePermissionsUpdateManyWithoutRoleNestedInput
 }
 
 input NewRecipeInput {

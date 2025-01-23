@@ -6,6 +6,7 @@ import { BoolFilter } from "../inputs/BoolFilter";
 import { DateTimeFilter } from "../inputs/DateTimeFilter";
 import { DateTimeNullableFilter } from "../inputs/DateTimeNullableFilter";
 import { IntFilter } from "../inputs/IntFilter";
+import { RoleRelationFilter } from "../inputs/RoleRelationFilter";
 import { StringFilter } from "../inputs/StringFilter";
 import { StringNullableFilter } from "../inputs/StringNullableFilter";
 
@@ -87,4 +88,14 @@ export class UserWhereInput {
     nullable: true
   })
   dateOfBirth?: DateTimeNullableFilter | undefined;
+
+  @Field(_type => IntFilter, {
+    nullable: true
+  })
+  roleId?: IntFilter | undefined;
+
+  @Field(_type => RoleRelationFilter, {
+    nullable: true
+  })
+  Role?: RoleRelationFilter | undefined;
 }

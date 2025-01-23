@@ -74,6 +74,11 @@ export class UserOrderByWithAggregationInput {
   })
   dateOfBirth?: SortOrderInput | undefined;
 
+  @Field(_type => SortOrder, {
+    nullable: true
+  })
+  roleId?: "asc" | "desc" | undefined;
+
   @Field(_type => UserCountOrderByAggregateInput, {
     nullable: true
   })
