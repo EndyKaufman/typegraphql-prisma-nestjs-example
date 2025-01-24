@@ -20,7 +20,7 @@ npm run start:watch
 
 http://localhost:3000/graphql - graphql gui
 
-https://endykaufman-typegraphql-prisma-nestjs-example.glitch.me/graphql - online graphql gui
+https://typegraphql-prisma-nestjs-example.vercel.app/graphql - online graphql gui
 
 https://github.com/EndyKaufman/typegraphql-prisma-nestjs-example/tree/master/src/dal - generated files for this example application
 
