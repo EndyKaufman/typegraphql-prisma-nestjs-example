@@ -25,7 +25,7 @@ setTransformArgsIntoPrismaArgs((info: GraphQLResolveInfo, args: any, ctx: any) =
         GraphQLModule.forRoot({
             driver: ApolloDriver,
             installSubscriptionHandlers: true,
-            autoSchemaFile: 'schema.gql',
+            ...(!process.env.VERCEL_ENV ? { autoSchemaFile: 'schema.gql' } : {}),
             debug: true,
             playground: true,
             tracing: true,

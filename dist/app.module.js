@@ -34,7 +34,7 @@ exports.AppModule = AppModule = __decorate([
             graphql_1.GraphQLModule.forRoot({
                 driver: apollo_1.ApolloDriver,
                 installSubscriptionHandlers: true,
-                autoSchemaFile: 'schema.gql',
+                ...(!process.env.VERCEL_ENV ? { autoSchemaFile: 'schema.gql' } : {}),
                 debug: true,
                 playground: true,
                 tracing: true,
