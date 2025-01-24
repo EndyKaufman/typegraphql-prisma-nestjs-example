@@ -4,6 +4,6 @@ import { Controller, Get } from '@nestjs/common';
 export class AppController {
     @Get()
     ok() {
-        return 'ok';
+        return '<a href="/graphql">Playground</a>';
     }
 }
