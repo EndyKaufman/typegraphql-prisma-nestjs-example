@@ -1,1 +1,0 @@
-{"version":3,"file":"SortOrder.js","sourceRoot":"","sources":["../../../src/dal/enums/SortOrder.ts"],"names":[],"mappings":";;;AAAA,6CAAoM;AAEpM,IAAY,SAGX;AAHD,WAAY,SAAS;IACnB,wBAAW,CAAA;IACX,0BAAa,CAAA;AACf,CAAC,EAHW,SAAS,yBAAT,SAAS,QAGpB;AACD,IAAA,0BAAgB,EAAC,SAAS,EAAE;IAC1B,IAAI,EAAE,WAAW;IACjB,WAAW,EAAE,SAAS;CACvB,CAAC,CAAC"}

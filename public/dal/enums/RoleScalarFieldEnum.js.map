@@ -1,1 +1,0 @@
-{"version":3,"file":"RoleScalarFieldEnum.js","sourceRoot":"","sources":["../../../src/dal/enums/RoleScalarFieldEnum.ts"],"names":[],"mappings":";;;AAAA,6CAAoM;AAEpM,IAAY,mBAGX;AAHD,WAAY,mBAAmB;IAC7B,gCAAS,CAAA;IACT,oCAAa,CAAA;AACf,CAAC,EAHW,mBAAmB,mCAAnB,mBAAmB,QAG9B;AACD,IAAA,0BAAgB,EAAC,mBAAmB,EAAE;IACpC,IAAI,EAAE,qBAAqB;IAC3B,WAAW,EAAE,SAAS;CACvB,CAAC,CAAC"}

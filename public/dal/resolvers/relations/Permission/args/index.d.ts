@@ -1,1 +1,0 @@
-export { PermissionRolePermissionsArgs } from "./PermissionRolePermissionsArgs";

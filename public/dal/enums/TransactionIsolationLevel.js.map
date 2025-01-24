@@ -1,1 +1,0 @@
-{"version":3,"file":"TransactionIsolationLevel.js","sourceRoot":"","sources":["../../../src/dal/enums/TransactionIsolationLevel.ts"],"names":[],"mappings":";;;AAAA,6CAAoM;AAEpM,IAAY,yBAEX;AAFD,WAAY,yBAAyB;IACnC,0DAA6B,CAAA;AAC/B,CAAC,EAFW,yBAAyB,yCAAzB,yBAAyB,QAEpC;AACD,IAAA,0BAAgB,EAAC,yBAAyB,EAAE;IAC1C,IAAI,EAAE,2BAA2B;IACjC,WAAW,EAAE,SAAS;CACvB,CAAC,CAAC"}
