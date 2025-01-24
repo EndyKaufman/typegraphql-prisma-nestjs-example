@@ -34,10 +34,49 @@ type Permission {
   id: Int!
   name: String!
   _count: PermissionCount
+  RolePermissions: [RolePermissions!]!
 }
 
 type PermissionCount {
   RolePermissions: Int!
+}
+
+type RolePermissions {
+  id: Int!
+  roleId: Int!
+  permissionId: Int!
+  Role: Role!
+  Permission: Permission!
+}
+
+type Role {
+  id: Int!
+  name: String!
+  _count: RoleCount
+  User: [User!]!
+  RolePermissions: [RolePermissions!]!
+}
+
+type RoleCount {
+  User: Int!
+  RolePermissions: Int!
+}
+
+type User {
+  id: Int!
+  email: String!
+  username: String
+  password: String!
+  firstName: String
+  lastName: String
+  lastLogin: Date!
+  isSuperuser: Boolean!
+  isStaff: Boolean!
+  isActive: Boolean!
+  dateJoined: Date!
+  dateOfBirth: Date
+  roleId: Int!
+  Role: Role!
 }
 
 input PermissionWhereInput {
@@ -273,17 +312,6 @@ enum PermissionScalarFieldEnum {
   name
 }
 
-type Role {
-  id: Int!
-  name: String!
-  _count: RoleCount
-}
-
-type RoleCount {
-  User: Int!
-  RolePermissions: Int!
-}
-
 input RoleOrderByWithRelationInput {
   id: SortOrder
   name: SortOrder
@@ -308,12 +336,6 @@ input RoleWhereUniqueInput {
 enum RoleScalarFieldEnum {
   id
   name
-}
-
-type RolePermissions {
-  id: Int!
-  roleId: Int!
-  permissionId: Int!
 }
 
 input RolePermissionsOrderByWithRelationInput {
@@ -345,22 +367,6 @@ enum RolePermissionsScalarFieldEnum {
   id
   roleId
   permissionId
-}
-
-type User {
-  id: Int!
-  email: String!
-  username: String
-  password: String!
-  firstName: String
-  lastName: String
-  lastLogin: Date!
-  isSuperuser: Boolean!
-  isStaff: Boolean!
-  isActive: Boolean!
-  dateJoined: Date!
-  dateOfBirth: Date
-  roleId: Int!
 }
 
 input UserOrderByWithRelationInput {

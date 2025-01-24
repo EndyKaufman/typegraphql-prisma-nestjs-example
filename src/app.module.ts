@@ -2,7 +2,7 @@ import { Module, Provider } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { PrismaClient } from '@prisma/client';
 import { GraphQLResolveInfo } from 'graphql';
-import { CreateOneUserArgs, UserCrudResolver, crudResolvers } from './dal';
+import { CreateOneUserArgs, UserCrudResolver, crudResolvers, relationResolvers } from './dal';
 import { setTransformArgsIntoPrismaArgs } from './dal/helpers';
 import { RecipesModule } from './recipes/recipes.module';
 import { ApolloDriver } from '@nestjs/apollo';
@@ -31,6 +31,6 @@ setTransformArgsIntoPrismaArgs((info: GraphQLResolveInfo, args: any, ctx: any) =
             context: ({ req }) => ({ req, prisma }),
         }),
     ],
-    providers: crudResolvers as unknown as Provider<any>[],
+    providers: [...crudResolvers, ...relationResolvers] as unknown as Provider<any>[],
 })
 export class AppModule {}

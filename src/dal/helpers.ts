@@ -146,15 +146,36 @@ export const Loader = createParamDecorator(
   }
 );
 
+
 /**
- * The decorator to be used within your graphql method.
+ * Easy way to create a dataloader in a specific location, context only needs to be used to access global properties that are set in each request.
+ * Added the ability to reuse simple dataloaders by a certain name.
  */
+export const InlineLoadersStorage = new Map();
 export const InlineLoader = createParamDecorator(
   (
-    generateDataLoader: <ID, Type>(context?: ExecutionContext) => DataLoader<ID, Type>,
+    generateDataLoader: <ID, Type>(context?: ExecutionContext) => DataLoader<ID, Type> | { name: string; loader: DataLoader<ID, Type> },
     context: ExecutionContext & { [key: string]: any }
   ) => {
-    return generateDataLoader(context);
+    const _class = context.getClass();
+    const _handler = context.getHandler();
+    const dataloader = generateDataLoader(context);
+
+    if ('loader' in dataloader) {
+      const dataloaderName = `Dataloader: ${dataloader.name}`;
+      if (!InlineLoadersStorage.has(dataloaderName)) {
+        InlineLoadersStorage.set(dataloaderName, dataloader.loader);
+      }
+      return InlineLoadersStorage.get(dataloaderName);
+    } else {
+      if (!InlineLoadersStorage.has(_class)) {
+        InlineLoadersStorage.set(_class, new Map());
+      }
+      if (!InlineLoadersStorage.get(_class).has(_handler)) {
+        InlineLoadersStorage.get(_class).set(_handler, dataloader);
+      }
+      return InlineLoadersStorage.get(_class).get(_handler);
+    }
   }
 );
 

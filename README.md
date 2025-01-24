@@ -60,11 +60,14 @@ Query
 
 ```graphql
 mutation {
-    createOneUser(data: { username: "user", email: "user@user.com", password: "secret", Role: { connect: { id: 1 } } }) {
+    createOneUser(data: { username: "user", email: "user@user.com", password: "secret", Role: { connect: { name: "User" } } }) {
         email
         username
         password
-        roleId
+        Role {
+            id
+            name
+        }
     }
 }
 ```
@@ -78,7 +81,10 @@ Result
       "email": "user@user.com",
       "username": "user",
       "password": "secret",
-      "roleId": 1
+        "Role": {
+          "id": 1,
+          "name": "User"
+        }
     }
   }
 }
@@ -94,6 +100,10 @@ query {
         id
         email
         password
+        Role {
+            id
+            name
+        }
     }
 }
 ```
@@ -107,7 +117,11 @@ Result
       {
         "id": 1,
         "email": "user@user.com",
-        "password": "secret"
+        "password": "secret",
+        "Role": {
+          "id": 1,
+          "name": "User"
+        }
       }
     ]
   }
