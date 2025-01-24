@@ -18,6 +18,5 @@ npm-debug.log
 /.nyc_output
 
 # dist
-/dist
 
 /prisma/data.db

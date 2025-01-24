@@ -7,14 +7,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
-const apollo_1 = require("@nestjs/apollo");
 const common_1 = require("@nestjs/common");
 const graphql_1 = require("@nestjs/graphql");
 const client_1 = require("@prisma/client");
-const app_controller_1 = require("./app.controller");
 const dal_1 = require("./dal");
 const helpers_1 = require("./dal/helpers");
 const recipes_module_1 = require("./recipes/recipes.module");
+const apollo_1 = require("@nestjs/apollo");
 const prisma = new client_1.PrismaClient({
     log: ['query'],
 });
@@ -34,15 +33,13 @@ exports.AppModule = AppModule = __decorate([
             graphql_1.GraphQLModule.forRoot({
                 driver: apollo_1.ApolloDriver,
                 installSubscriptionHandlers: true,
-                autoSchemaFile: process.env.VERCEL_ENV ? true : 'schema.gql',
+                autoSchemaFile: 'schema.gql',
                 debug: true,
-                introspection: true,
                 playground: true,
                 tracing: true,
                 context: ({ req }) => ({ req, prisma }),
             }),
         ],
-        controllers: [app_controller_1.AppController],
         providers: [...dal_1.crudResolvers, ...dal_1.relationResolvers],
     })
 ], AppModule);
