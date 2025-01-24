@@ -22,7 +22,7 @@
     "prisma": "prisma",
     "prisma:db:create": "npm run prisma -- migrate dev",
     "prisma:migrate:up": "npm run prisma -- migrate deploy",
-    "prisma:sync": "npm run prisma -- db push --accept-data-lose",
+    "prisma:sync": "npm run prisma -- db push --accept-data-loss",
     "prisma:generate": "npm run prisma -- generate",
     "prisma:watch": "npm run prisma -- generate -- --watch",
     "prisma:silent-watch": "npm run prisma -- generate -- --watch &"
