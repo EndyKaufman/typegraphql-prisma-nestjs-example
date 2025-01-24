@@ -4,6 +4,10 @@
         {
             "src": "dist/main.js",
             "use": "@vercel/node"
+        },
+        {
+            "src": "index.js",
+            "use": "@vercel/node"
         }
     ],
     "routes": [

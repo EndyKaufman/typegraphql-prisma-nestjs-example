@@ -4,7 +4,7 @@
   "description": "Nest TypeScript starter repository",
   "license": "MIT",
   "scripts": {
-    "vercel-build": "cp -r vercel.gitignore .gitignore && npm run prisma:migrate:up && npm run prisma:generate && nest build && git add .",
+    "vercel-build": "cp -r vercel.gitignore .gitignore && npm run prisma:migrate:up && npm run prisma:generate && nest build && rm -rf index.js",
     "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\"",
