@@ -19,5 +19,6 @@ npm-debug.log
 
 # dist
 /dist
+/public
 
 /prisma/data.db
