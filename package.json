@@ -6,7 +6,6 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "vercel-build": "nest build && cp -r dist public && cp -r public/main.js public/index.js",
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "npm run prisma:migrate:up && npm run prisma:generate && nest start",
     "start:watch": "npm run prisma:migrate:up && npm run prisma:generate && nest start --watch",
