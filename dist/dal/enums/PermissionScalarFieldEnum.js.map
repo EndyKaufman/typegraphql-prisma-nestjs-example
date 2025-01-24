@@ -1,0 +1,1 @@
+{"version":3,"file":"PermissionScalarFieldEnum.js","sourceRoot":"","sources":["../../../src/dal/enums/PermissionScalarFieldEnum.ts"],"names":[],"mappings":";;;AAAA,6CAAoM;AAEpM,IAAY,yBAGX;AAHD,WAAY,yBAAyB;IACnC,sCAAS,CAAA;IACT,0CAAa,CAAA;AACf,CAAC,EAHW,yBAAyB,yCAAzB,yBAAyB,QAGpC;AACD,IAAA,0BAAgB,EAAC,yBAAyB,EAAE;IAC1C,IAAI,EAAE,2BAA2B;IACjC,WAAW,EAAE,SAAS;CACvB,CAAC,CAAC"}

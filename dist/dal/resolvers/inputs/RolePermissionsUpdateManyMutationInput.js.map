@@ -1,0 +1,1 @@
+{"version":3,"file":"RolePermissionsUpdateManyMutationInput.js","sourceRoot":"","sources":["../../../../src/dal/resolvers/inputs/RolePermissionsUpdateManyMutationInput.ts"],"names":[],"mappings":";;;;;;;;;AAAA,6CAAoM;AAQ7L,IAAM,sCAAsC,GAA5C,MAAM,sCAAsC;CAClD,CAAA;AADY,wFAAsC;iDAAtC,sCAAsC;IAHlD,IAAA,mBAAS,EAAC,wCAAwC,EAAE;QACnD,UAAU,EAAE,IAAI;KACjB,CAAC;GACW,sCAAsC,CAClD"}
