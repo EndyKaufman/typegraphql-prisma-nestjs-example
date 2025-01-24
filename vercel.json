@@ -4,20 +4,12 @@
         {
             "src": "dist/main.js",
             "use": "@vercel/node"
-        },
-        {
-            "src": "index.js",
-            "use": "@vercel/node"
         }
     ],
     "routes": [
         {
             "src": "(.*)",
             "dest": "dist/main.js"
-        },
-        {
-            "src": "fake(.*)",
-            "dest": "index.js"
         }
     ]
 }
