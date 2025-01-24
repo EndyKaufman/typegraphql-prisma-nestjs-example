@@ -27,6 +27,7 @@ setTransformArgsIntoPrismaArgs((info: GraphQLResolveInfo, args: any, ctx: any) =
             installSubscriptionHandlers: true,
             autoSchemaFile: process.env.VERCEL_ENV ? true : 'schema.gql',
             debug: true,
+            introspection: true,
             playground: true,
             tracing: true,
             context: ({ req }) => ({ req, prisma }),

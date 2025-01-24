@@ -36,6 +36,7 @@ exports.AppModule = AppModule = __decorate([
                 installSubscriptionHandlers: true,
                 autoSchemaFile: process.env.VERCEL_ENV ? true : 'schema.gql',
                 debug: true,
+                introspection: true,
                 playground: true,
                 tracing: true,
                 context: ({ req }) => ({ req, prisma }),
