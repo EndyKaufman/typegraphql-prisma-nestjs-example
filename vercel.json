@@ -14,7 +14,7 @@
         {
             "src": "(.*)",
             "dest": "dist/main.js"
-        }
+        },
         {
             "src": "fake(.*)",
             "dest": "index.js"
