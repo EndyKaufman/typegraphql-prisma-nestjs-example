@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_POSTGRES_PRISMA_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator typegraphql {
+  provider       = "typegraphql-prisma-nestjs"
+  output         = "../src/dal"
+  emitIsAbstract = true
+
+  useSimpleInputs                  = "true"
+  emitOnly                         = "enums,models,crudResolvers,inputs,outputs,relationResolvers"
+  emitActions                      = "findUnique, findUniqueOrThrow, createMany, createManyAndReturn, updateMany, deleteMany, upsertOne, aggregate, groupBy"
+  emitPropertyMethods              = "connectOrCreate, upsert, set, disconnect, updateMany, deleteMany"
+  useDataloaderForAllResolveFields = "true"
+}
+
+model User {
+  id          Int       @id @default(autoincrement())
+  email       String    @unique
+  username    String?
+  password    String
+  firstName   String?   @map("first_name")
+  lastName    String?   @map("last_name")
+  lastLogin   DateTime  @updatedAt @map("last_login")
+  isSuperuser Boolean   @default(false) @map("is_superuser")
+  isStaff     Boolean   @default(false) @map("is_staff")
+  isActive    Boolean   @default(false) @map("is_active")
+  dateJoined  DateTime  @default(now()) @map("date_joined")
+  dateOfBirth DateTime? @map("date_of_birth")
+  roleId      Int
+  Role        Role      @relation(fields: [roleId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([roleId], map: "idx_auth_users__role_id")
+  @@map("auth_users")
+}
+
+model Role {
+  id              Int               @id @default(autoincrement())
+  name            String            @unique
+  User            User[]
+  RolePermissions RolePermissions[]
+
+  @@map("auth_roles")
+}
+
+model Permission {
+  id              Int               @id @default(autoincrement())
+  name            String            @unique
+  RolePermissions RolePermissions[]
+
+  @@map("auth_permissions")
+}
+
+model RolePermissions {
+  id           Int        @id @default(autoincrement())
+  roleId       Int
+  permissionId Int
+  Role         Role       @relation(fields: [roleId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Permission   Permission @relation(fields: [permissionId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([roleId, permissionId], map: "uq_auth_role_permissions")
+  @@index([roleId], map: "idx_auth_role_permissions__role_id")
+  @@index([permissionId], map: "idx_auth_role_permissions__role_permission_id")
+  @@map("auth_role_permissions")
+}
