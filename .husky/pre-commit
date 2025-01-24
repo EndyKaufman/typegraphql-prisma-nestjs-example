@@ -1,3 +1,0 @@
-rimraf dist
-cp-cli mock-main.js dist/main.js
-git add dist
