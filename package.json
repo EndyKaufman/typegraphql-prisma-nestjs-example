@@ -10,7 +10,7 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "npm run prisma:migrate:up && npm run prisma:generate && nest start",
     "start:watch": "npm run prisma:migrate:up && npm run prisma:generate && npm run start:dev",
-    "start:dev": "export DATABASE_URL='file:./data.db' nest start --watch",
+    "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "eslint '{src,apps,libs,test}/**/*.ts' --fix",
