@@ -22,7 +22,7 @@ export class RolePermissionsRelationsResolver {
           },
         });
         return ids.map(id => result.find(r => r.id === id) || null) as Type[]
-      }
+      }, { cache: false, batchScheduleFn: (cb) => setTimeout(() => process.nextTick(cb), 100) }
     )
   }) dataloader: DataLoader<number, Role>): Promise<Role> {
     return await dataloader.load(rolePermissions.roleId);
@@ -42,7 +42,7 @@ export class RolePermissionsRelationsResolver {
           },
         });
         return ids.map(id => result.find(r => r.id === id) || null) as Type[]
-      }
+      }, { cache: false, batchScheduleFn: (cb) => setTimeout(() => process.nextTick(cb), 100) }
     )
   }) dataloader: DataLoader<number, Permission>): Promise<Permission> {
     return await dataloader.load(rolePermissions.permissionId);

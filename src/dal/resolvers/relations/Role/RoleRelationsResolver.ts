@@ -24,7 +24,7 @@ export class RoleRelationsResolver {
           },
         });
         return ids.map(id => result.filter(r => r.id === id) || []) as Type[]
-      }
+      }, { cache: false, batchScheduleFn: (cb) => setTimeout(() => process.nextTick(cb), 100) }
     )
   }) dataloader: DataLoader<number, User[]>): Promise<User[]> {
     return await dataloader.load(role.id);
@@ -44,7 +44,7 @@ export class RoleRelationsResolver {
           },
         });
         return ids.map(id => result.filter(r => r.id === id) || []) as Type[]
-      }
+      }, { cache: false, batchScheduleFn: (cb) => setTimeout(() => process.nextTick(cb), 100) }
     )
   }) dataloader: DataLoader<number, RolePermissions[]>): Promise<RolePermissions[]> {
     return await dataloader.load(role.id);
