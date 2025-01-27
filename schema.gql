@@ -34,7 +34,7 @@ type Permission {
   id: Int!
   name: String!
   _count: PermissionCount
-  RolePermissions: [RolePermissions!]!
+  RolePermissions(where: RolePermissionsWhereInput, orderBy: [RolePermissionsOrderByWithRelationInput!], cursor: RolePermissionsWhereUniqueInput, take: Int, skip: Int, distinct: [RolePermissionsScalarFieldEnum!]): [RolePermissions!]!
 }
 
 type PermissionCount {
@@ -53,8 +53,8 @@ type Role {
   id: Int!
   name: String!
   _count: RoleCount
-  User: [User!]!
-  RolePermissions: [RolePermissions!]!
+  User(where: UserWhereInput, orderBy: [UserOrderByWithRelationInput!], cursor: UserWhereUniqueInput, take: Int, skip: Int, distinct: [UserScalarFieldEnum!]): [User!]!
+  RolePermissions(where: RolePermissionsWhereInput, orderBy: [RolePermissionsOrderByWithRelationInput!], cursor: RolePermissionsWhereUniqueInput, take: Int, skip: Int, distinct: [RolePermissionsScalarFieldEnum!]): [RolePermissions!]!
 }
 
 type RoleCount {
@@ -79,13 +79,24 @@ type User {
   Role: Role!
 }
 
-input PermissionWhereInput {
-  AND: [PermissionWhereInput!]
-  OR: [PermissionWhereInput!]
-  NOT: [PermissionWhereInput!]
+input UserWhereInput {
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
   id: IntFilter
-  name: StringFilter
-  RolePermissions: RolePermissionsListRelationFilter
+  email: StringFilter
+  username: StringNullableFilter
+  password: StringFilter
+  firstName: StringNullableFilter
+  lastName: StringNullableFilter
+  lastLogin: DateTimeFilter
+  isSuperuser: BoolFilter
+  isStaff: BoolFilter
+  isActive: BoolFilter
+  dateJoined: DateTimeFilter
+  dateOfBirth: DateTimeNullableFilter
+  roleId: IntFilter
+  Role: RoleRelationFilter
 }
 
 input IntFilter {
@@ -136,64 +147,6 @@ input NestedStringFilter {
   startsWith: String
   endsWith: String
   not: NestedStringFilter
-}
-
-input RolePermissionsListRelationFilter {
-  every: RolePermissionsWhereInput
-  some: RolePermissionsWhereInput
-  none: RolePermissionsWhereInput
-}
-
-input RolePermissionsWhereInput {
-  AND: [RolePermissionsWhereInput!]
-  OR: [RolePermissionsWhereInput!]
-  NOT: [RolePermissionsWhereInput!]
-  id: IntFilter
-  roleId: IntFilter
-  permissionId: IntFilter
-  Role: RoleRelationFilter
-  Permission: PermissionRelationFilter
-}
-
-input RoleRelationFilter {
-  is: RoleWhereInput
-  isNot: RoleWhereInput
-}
-
-input RoleWhereInput {
-  AND: [RoleWhereInput!]
-  OR: [RoleWhereInput!]
-  NOT: [RoleWhereInput!]
-  id: IntFilter
-  name: StringFilter
-  User: UserListRelationFilter
-  RolePermissions: RolePermissionsListRelationFilter
-}
-
-input UserListRelationFilter {
-  every: UserWhereInput
-  some: UserWhereInput
-  none: UserWhereInput
-}
-
-input UserWhereInput {
-  AND: [UserWhereInput!]
-  OR: [UserWhereInput!]
-  NOT: [UserWhereInput!]
-  id: IntFilter
-  email: StringFilter
-  username: StringNullableFilter
-  password: StringFilter
-  firstName: StringNullableFilter
-  lastName: StringNullableFilter
-  lastLogin: DateTimeFilter
-  isSuperuser: BoolFilter
-  isStaff: BoolFilter
-  isActive: BoolFilter
-  dateJoined: DateTimeFilter
-  dateOfBirth: DateTimeNullableFilter
-  roleId: IntFilter
-  Role: RoleRelationFilter
 }
 
 input StringNullableFilter {
@@ -278,95 +231,56 @@ input NestedDateTimeNullableFilter {
   not: NestedDateTimeNullableFilter
 }
 
-input PermissionRelationFilter {
-  is: PermissionWhereInput
-  isNot: PermissionWhereInput
+input RoleRelationFilter {
+  is: RoleWhereInput
+  isNot: RoleWhereInput
 }
 
-input PermissionOrderByWithRelationInput {
-  id: SortOrder
-  name: SortOrder
-  RolePermissions: RolePermissionsOrderByRelationAggregateInput
-}
-
-enum SortOrder {
-  asc
-  desc
-}
-
-input RolePermissionsOrderByRelationAggregateInput {
-  _count: SortOrder
-}
-
-input PermissionWhereUniqueInput {
-  id: Int
-  name: String
-  AND: [PermissionWhereInput!]
-  OR: [PermissionWhereInput!]
-  NOT: [PermissionWhereInput!]
-  RolePermissions: RolePermissionsListRelationFilter
-}
-
-enum PermissionScalarFieldEnum {
-  id
-  name
-}
-
-input RoleOrderByWithRelationInput {
-  id: SortOrder
-  name: SortOrder
-  User: UserOrderByRelationAggregateInput
-  RolePermissions: RolePermissionsOrderByRelationAggregateInput
-}
-
-input UserOrderByRelationAggregateInput {
-  _count: SortOrder
-}
-
-input RoleWhereUniqueInput {
-  id: Int
-  name: String
+input RoleWhereInput {
   AND: [RoleWhereInput!]
   OR: [RoleWhereInput!]
   NOT: [RoleWhereInput!]
+  id: IntFilter
+  name: StringFilter
   User: UserListRelationFilter
   RolePermissions: RolePermissionsListRelationFilter
 }
 
-enum RoleScalarFieldEnum {
-  id
-  name
+input UserListRelationFilter {
+  every: UserWhereInput
+  some: UserWhereInput
+  none: UserWhereInput
 }
 
-input RolePermissionsOrderByWithRelationInput {
-  id: SortOrder
-  roleId: SortOrder
-  permissionId: SortOrder
-  Role: RoleOrderByWithRelationInput
-  Permission: PermissionOrderByWithRelationInput
+input RolePermissionsListRelationFilter {
+  every: RolePermissionsWhereInput
+  some: RolePermissionsWhereInput
+  none: RolePermissionsWhereInput
 }
 
-input RolePermissionsWhereUniqueInput {
-  id: Int
-  roleId_permissionId: RolePermissionsRoleIdPermissionIdCompoundUniqueInput
+input RolePermissionsWhereInput {
   AND: [RolePermissionsWhereInput!]
   OR: [RolePermissionsWhereInput!]
   NOT: [RolePermissionsWhereInput!]
+  id: IntFilter
   roleId: IntFilter
   permissionId: IntFilter
   Role: RoleRelationFilter
   Permission: PermissionRelationFilter
 }
 
-input RolePermissionsRoleIdPermissionIdCompoundUniqueInput {
-  roleId: Int!
-  permissionId: Int!
+input PermissionRelationFilter {
+  is: PermissionWhereInput
+  isNot: PermissionWhereInput
 }
 
-enum RolePermissionsScalarFieldEnum {
-  id
-  roleId
-  permissionId
+input PermissionWhereInput {
+  AND: [PermissionWhereInput!]
+  OR: [PermissionWhereInput!]
+  NOT: [PermissionWhereInput!]
+  id: IntFilter
+  name: StringFilter
+  RolePermissions: RolePermissionsListRelationFilter
 }
 
 input UserOrderByWithRelationInput {
@@ -386,6 +300,11 @@ input UserOrderByWithRelationInput {
   Role: RoleOrderByWithRelationInput
 }
 
+enum SortOrder {
+  asc
+  desc
+}
+
 input SortOrderInput {
   sort: SortOrder!
   nulls: NullsOrder
@@ -394,6 +313,21 @@ input SortOrderInput {
 enum NullsOrder {
   first
   last
+}
+
+input RoleOrderByWithRelationInput {
+  id: SortOrder
+  name: SortOrder
+  User: UserOrderByRelationAggregateInput
+  RolePermissions: RolePermissionsOrderByRelationAggregateInput
+}
+
+input UserOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input RolePermissionsOrderByRelationAggregateInput {
+  _count: SortOrder
 }
 
 input UserWhereUniqueInput {
@@ -430,6 +364,72 @@ enum UserScalarFieldEnum {
   dateJoined
   dateOfBirth
   roleId
+}
+
+input RolePermissionsOrderByWithRelationInput {
+  id: SortOrder
+  roleId: SortOrder
+  permissionId: SortOrder
+  Role: RoleOrderByWithRelationInput
+  Permission: PermissionOrderByWithRelationInput
+}
+
+input PermissionOrderByWithRelationInput {
+  id: SortOrder
+  name: SortOrder
+  RolePermissions: RolePermissionsOrderByRelationAggregateInput
+}
+
+input RolePermissionsWhereUniqueInput {
+  id: Int
+  roleId_permissionId: RolePermissionsRoleIdPermissionIdCompoundUniqueInput
+  AND: [RolePermissionsWhereInput!]
+  OR: [RolePermissionsWhereInput!]
+  NOT: [RolePermissionsWhereInput!]
+  roleId: IntFilter
+  permissionId: IntFilter
+  Role: RoleRelationFilter
+  Permission: PermissionRelationFilter
+}
+
+input RolePermissionsRoleIdPermissionIdCompoundUniqueInput {
+  roleId: Int!
+  permissionId: Int!
+}
+
+enum RolePermissionsScalarFieldEnum {
+  id
+  roleId
+  permissionId
+}
+
+input PermissionWhereUniqueInput {
+  id: Int
+  name: String
+  AND: [PermissionWhereInput!]
+  OR: [PermissionWhereInput!]
+  NOT: [PermissionWhereInput!]
+  RolePermissions: RolePermissionsListRelationFilter
+}
+
+enum PermissionScalarFieldEnum {
+  id
+  name
+}
+
+input RoleWhereUniqueInput {
+  id: Int
+  name: String
+  AND: [RoleWhereInput!]
+  OR: [RoleWhereInput!]
+  NOT: [RoleWhereInput!]
+  User: UserListRelationFilter
+  RolePermissions: RolePermissionsListRelationFilter
+}
+
+enum RoleScalarFieldEnum {
+  id
+  name
 }
 
 type Mutation {
