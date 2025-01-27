@@ -21,9 +21,9 @@ export class RoleRelationsResolver {
         const context = (loader as any).context;
         const info = (loader as any).info;
         const args = (loader as any).args;
-        const { _count } = transformInfoIntoPrismaArgs(info, 'Role', 'role', 'findMany');
-        const transformedArgsIntoPrismaArgs = await transformArgsIntoPrismaArgs(info, args, context, 'Role', 'role', 'findMany', []);
-        const otherArgs = _count && transformCountFieldIntoSelectRelationsCount(_count, 'Role', 'role', 'findMany');
+        const { _count } = transformInfoIntoPrismaArgs(info, 'Role', 'role', 'findMany', true);
+        const transformedArgsIntoPrismaArgs = await transformArgsIntoPrismaArgs(info, args, context, 'Role', 'role', 'findMany', [], true);
+        const otherArgs = _count && transformCountFieldIntoSelectRelationsCount(_count, 'Role', 'role', 'findMany', true);
         const allArgs = { ...transformedArgsIntoPrismaArgs, ...otherArgs, };
         const result: User[] = await getPrismaFromContext(ctx).user.findMany({
           ...allArgs,
@@ -54,9 +54,9 @@ export class RoleRelationsResolver {
         const context = (loader as any).context;
         const info = (loader as any).info;
         const args = (loader as any).args;
-        const { _count } = transformInfoIntoPrismaArgs(info, 'Role', 'role', 'findMany');
-        const transformedArgsIntoPrismaArgs = await transformArgsIntoPrismaArgs(info, args, context, 'Role', 'role', 'findMany', []);
-        const otherArgs = _count && transformCountFieldIntoSelectRelationsCount(_count, 'Role', 'role', 'findMany');
+        const { _count } = transformInfoIntoPrismaArgs(info, 'Role', 'role', 'findMany', true);
+        const transformedArgsIntoPrismaArgs = await transformArgsIntoPrismaArgs(info, args, context, 'Role', 'role', 'findMany', [], true);
+        const otherArgs = _count && transformCountFieldIntoSelectRelationsCount(_count, 'Role', 'role', 'findMany', true);
         const allArgs = { ...transformedArgsIntoPrismaArgs, ...otherArgs, };
         const result: RolePermissions[] = await getPrismaFromContext(ctx).rolePermissions.findMany({
           ...allArgs,

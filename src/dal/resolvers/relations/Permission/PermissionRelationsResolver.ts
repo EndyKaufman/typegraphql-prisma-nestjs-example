@@ -19,9 +19,9 @@ export class PermissionRelationsResolver {
         const context = (loader as any).context;
         const info = (loader as any).info;
         const args = (loader as any).args;
-        const { _count } = transformInfoIntoPrismaArgs(info, 'Permission', 'permission', 'findMany');
-        const transformedArgsIntoPrismaArgs = await transformArgsIntoPrismaArgs(info, args, context, 'Permission', 'permission', 'findMany', []);
-        const otherArgs = _count && transformCountFieldIntoSelectRelationsCount(_count, 'Permission', 'permission', 'findMany');
+        const { _count } = transformInfoIntoPrismaArgs(info, 'Permission', 'permission', 'findMany', true);
+        const transformedArgsIntoPrismaArgs = await transformArgsIntoPrismaArgs(info, args, context, 'Permission', 'permission', 'findMany', [], true);
+        const otherArgs = _count && transformCountFieldIntoSelectRelationsCount(_count, 'Permission', 'permission', 'findMany', true);
         const allArgs = { ...transformedArgsIntoPrismaArgs, ...otherArgs, };
         const result: RolePermissions[] = await getPrismaFromContext(ctx).rolePermissions.findMany({
           ...allArgs,

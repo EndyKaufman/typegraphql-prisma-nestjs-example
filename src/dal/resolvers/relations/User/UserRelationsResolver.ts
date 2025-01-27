@@ -18,9 +18,9 @@ export class UserRelationsResolver {
         const context = (loader as any).context;
         const info = (loader as any).info;
         const args = (loader as any).args;
-        const { _count } = transformInfoIntoPrismaArgs(info, 'User', 'user', 'findMany');
-        const transformedArgsIntoPrismaArgs = await transformArgsIntoPrismaArgs(info, args, context, 'User', 'user', 'findMany', []);
-        const otherArgs = _count && transformCountFieldIntoSelectRelationsCount(_count, 'User', 'user', 'findMany');
+        const { _count } = transformInfoIntoPrismaArgs(info, 'User', 'user', 'findMany', true);
+        const transformedArgsIntoPrismaArgs = await transformArgsIntoPrismaArgs(info, args, context, 'User', 'user', 'findMany', [], true);
+        const otherArgs = _count && transformCountFieldIntoSelectRelationsCount(_count, 'User', 'user', 'findMany', true);
         const allArgs = { ...transformedArgsIntoPrismaArgs, ...otherArgs, };
         const result: Role[] = await getPrismaFromContext(ctx).role.findMany({
           ...allArgs,
