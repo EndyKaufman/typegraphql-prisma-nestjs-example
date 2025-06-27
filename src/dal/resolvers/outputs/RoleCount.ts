@@ -14,7 +14,12 @@ export class RoleCount {
 
   @Field(_type => Int, {
     name: "User",
-    nullable: false
+    nullable: false,
+    middleware: [
+      async (ctx) => {
+        return ctx.source.User || 0;
+      },
+    ]
   })
   getUser(@Root() root: RoleCount, @Args() args: RoleCountUserArgs): number {
     return root.User;
@@ -22,7 +27,12 @@ export class RoleCount {
 
   @Field(_type => Int, {
     name: "RolePermissions",
-    nullable: false
+    nullable: false,
+    middleware: [
+      async (ctx) => {
+        return ctx.source.RolePermissions || 0;
+      },
+    ]
   })
   getRolePermissions(@Root() root: RoleCount, @Args() args: RoleCountRolePermissionsArgs): number {
     return root.RolePermissions;

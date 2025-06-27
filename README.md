@@ -159,6 +159,40 @@ Result
 }
 ```
 
+
+### Using "_count" for this https://github.com/EndyKaufman/typegraphql-prisma-nestjs/issues/49
+
+Query
+
+```graphql
+query {
+  roles {
+    id
+    name
+    _count{User,RolePermissions}
+  }
+}
+```
+
+Result
+
+```js
+{
+  "data": {
+    "roles": [
+      {
+        "id": 1,
+        "name": "User",
+        "_count": {
+          "User": 1,
+          "RolePermissions": 0
+        }
+      }
+    ]
+  }
+}
+```
+
 ### Mutation by Prisma2 + TypeGraphQL generator + use data from headers in data for insert to prisma = Generated Crud
 
 Rule:

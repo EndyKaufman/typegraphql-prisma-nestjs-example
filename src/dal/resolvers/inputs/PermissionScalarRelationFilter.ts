@@ -2,19 +2,19 @@ import { Args, ArgsType, Context, Field, Float, GqlExecutionContext, ID, Info, I
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
-import { RoleWhereInput } from "../inputs/RoleWhereInput";
+import { PermissionWhereInput } from "../inputs/PermissionWhereInput";
 
-@InputType("RoleRelationFilter", {
+@InputType("PermissionScalarRelationFilter", {
   isAbstract: true
 })
-export class RoleRelationFilter {
-  @Field(_type => RoleWhereInput, {
+export class PermissionScalarRelationFilter {
+  @Field(_type => PermissionWhereInput, {
     nullable: true
   })
-  is?: RoleWhereInput | undefined;
+  is?: PermissionWhereInput | undefined;
 
-  @Field(_type => RoleWhereInput, {
+  @Field(_type => PermissionWhereInput, {
     nullable: true
   })
-  isNot?: RoleWhereInput | undefined;
+  isNot?: PermissionWhereInput | undefined;
 }

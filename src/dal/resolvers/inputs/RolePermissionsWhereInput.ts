@@ -3,8 +3,8 @@ import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
 import { IntFilter } from "../inputs/IntFilter";
-import { PermissionRelationFilter } from "../inputs/PermissionRelationFilter";
-import { RoleRelationFilter } from "../inputs/RoleRelationFilter";
+import { PermissionScalarRelationFilter } from "../inputs/PermissionScalarRelationFilter";
+import { RoleScalarRelationFilter } from "../inputs/RoleScalarRelationFilter";
 
 @InputType("RolePermissionsWhereInput", {
   isAbstract: true
@@ -40,13 +40,13 @@ export class RolePermissionsWhereInput {
   })
   permissionId?: IntFilter | undefined;
 
-  @Field(_type => RoleRelationFilter, {
+  @Field(_type => RoleScalarRelationFilter, {
     nullable: true
   })
-  Role?: RoleRelationFilter | undefined;
+  Role?: RoleScalarRelationFilter | undefined;
 
-  @Field(_type => PermissionRelationFilter, {
+  @Field(_type => PermissionScalarRelationFilter, {
     nullable: true
   })
-  Permission?: PermissionRelationFilter | undefined;
+  Permission?: PermissionScalarRelationFilter | undefined;
 }

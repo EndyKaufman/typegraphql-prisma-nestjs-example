@@ -36,7 +36,7 @@ export { PermissionMaxOrderByAggregateInput } from "./PermissionMaxOrderByAggreg
 export { PermissionMinOrderByAggregateInput } from "./PermissionMinOrderByAggregateInput";
 export { PermissionOrderByWithAggregationInput } from "./PermissionOrderByWithAggregationInput";
 export { PermissionOrderByWithRelationInput } from "./PermissionOrderByWithRelationInput";
-export { PermissionRelationFilter } from "./PermissionRelationFilter";
+export { PermissionScalarRelationFilter } from "./PermissionScalarRelationFilter";
 export { PermissionScalarWhereWithAggregatesInput } from "./PermissionScalarWhereWithAggregatesInput";
 export { PermissionSumOrderByAggregateInput } from "./PermissionSumOrderByAggregateInput";
 export { PermissionUpdateInput } from "./PermissionUpdateInput";
@@ -99,7 +99,7 @@ export { RolePermissionsUpsertWithWhereUniqueWithoutPermissionInput } from "./Ro
 export { RolePermissionsUpsertWithWhereUniqueWithoutRoleInput } from "./RolePermissionsUpsertWithWhereUniqueWithoutRoleInput";
 export { RolePermissionsWhereInput } from "./RolePermissionsWhereInput";
 export { RolePermissionsWhereUniqueInput } from "./RolePermissionsWhereUniqueInput";
-export { RoleRelationFilter } from "./RoleRelationFilter";
+export { RoleScalarRelationFilter } from "./RoleScalarRelationFilter";
 export { RoleScalarWhereWithAggregatesInput } from "./RoleScalarWhereWithAggregatesInput";
 export { RoleSumOrderByAggregateInput } from "./RoleSumOrderByAggregateInput";
 export { RoleUpdateInput } from "./RoleUpdateInput";

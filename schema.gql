@@ -96,7 +96,7 @@ input UserWhereInput {
   dateJoined: DateTimeFilter
   dateOfBirth: DateTimeNullableFilter
   roleId: IntFilter
-  Role: RoleRelationFilter
+  Role: RoleScalarRelationFilter
 }
 
 input IntFilter {
@@ -231,7 +231,7 @@ input NestedDateTimeNullableFilter {
   not: NestedDateTimeNullableFilter
 }
 
-input RoleRelationFilter {
+input RoleScalarRelationFilter {
   is: RoleWhereInput
   isNot: RoleWhereInput
 }
@@ -265,11 +265,11 @@ input RolePermissionsWhereInput {
   id: IntFilter
   roleId: IntFilter
   permissionId: IntFilter
-  Role: RoleRelationFilter
-  Permission: PermissionRelationFilter
+  Role: RoleScalarRelationFilter
+  Permission: PermissionScalarRelationFilter
 }
 
-input PermissionRelationFilter {
+input PermissionScalarRelationFilter {
   is: PermissionWhereInput
   isNot: PermissionWhereInput
 }
@@ -347,7 +347,7 @@ input UserWhereUniqueInput {
   dateJoined: DateTimeFilter
   dateOfBirth: DateTimeNullableFilter
   roleId: IntFilter
-  Role: RoleRelationFilter
+  Role: RoleScalarRelationFilter
 }
 
 enum UserScalarFieldEnum {
@@ -388,8 +388,8 @@ input RolePermissionsWhereUniqueInput {
   NOT: [RolePermissionsWhereInput!]
   roleId: IntFilter
   permissionId: IntFilter
-  Role: RoleRelationFilter
-  Permission: PermissionRelationFilter
+  Role: RoleScalarRelationFilter
+  Permission: PermissionScalarRelationFilter
 }
 
 input RolePermissionsRoleIdPermissionIdCompoundUniqueInput {

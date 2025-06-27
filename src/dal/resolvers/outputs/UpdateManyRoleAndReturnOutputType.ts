@@ -2,19 +2,18 @@ import { Args, ArgsType, Context, Field, Float, GqlExecutionContext, ID, Info, I
 import * as GraphQLScalars from "graphql-scalars";
 import { Prisma } from "@prisma/client";
 import { DecimalJSScalar } from "../../scalars";
-import { PermissionWhereInput } from "../inputs/PermissionWhereInput";
 
-@InputType("PermissionRelationFilter", {
+@ObjectType("UpdateManyRoleAndReturnOutputType", {
   isAbstract: true
 })
-export class PermissionRelationFilter {
-  @Field(_type => PermissionWhereInput, {
-    nullable: true
+export class UpdateManyRoleAndReturnOutputType {
+  @Field(_type => Int, {
+    nullable: false
   })
-  is?: PermissionWhereInput | undefined;
+  id!: number;
 
-  @Field(_type => PermissionWhereInput, {
-    nullable: true
+  @Field(_type => String, {
+    nullable: false
   })
-  isNot?: PermissionWhereInput | undefined;
+  name!: string;
 }
